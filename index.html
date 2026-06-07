@@ -206,9 +206,12 @@ nav.scrolled{background:rgba(10,10,10,.72);backdrop-filter:blur(14px);border-bot
 .sol-section{overflow:hidden}
 .sol-media{position:absolute;inset:0;z-index:0}
 .sol-media video,.sol-media .poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.sol-media video{filter:contrast(1.07) saturate(1.1) brightness(1.07)}
 .sol-media .poster{background:#06090b url('arobotix-solution-poster.jpg') center/cover no-repeat}
-.sol-media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,10,.9) 0%,rgba(10,10,10,.8) 45%,rgba(10,10,10,.88) 100%),radial-gradient(120% 80% at 82% 28%,rgba(0,212,255,.1),transparent 55%)}
+.sol-media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,10,.7) 0%,rgba(10,10,10,.46) 42%,rgba(10,10,10,.6) 100%),radial-gradient(120% 80% at 82% 28%,rgba(0,212,255,.08),transparent 55%)}
 .sol-section .wrap{position:relative;z-index:1}
+.sol-copy{background:rgba(8,11,13,.5);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);border:1px solid var(--line);border-radius:12px;padding:26px}
+@media(max-width:900px){.sol-copy{padding:20px}}
 @media(max-width:900px){.sol{grid-template-columns:1fr;gap:34px}}
 .flow{display:flex;flex-direction:column;gap:14px}
 .flow-node{border:1px solid var(--line);border-radius:8px;padding:18px 22px;text-align:center;background:var(--surface);transition:all .3s;position:relative}
@@ -502,7 +505,7 @@ ul.tick li::before{content:"▪";color:var(--accent);font-size:.7rem;margin-top:
           </div>
         </div>
       </div>
-      <div class="reveal d1">
+      <div class="reveal d1 sol-copy">
         <h3 style="color:var(--accent);font-family:'Chakra Petch';font-weight:700;font-size:1.2rem;margin-bottom:14px">Think of it as air-traffic control for construction execution.</h3>
         <p class="lead">Air-traffic control does not fly the planes. It makes sure every aircraft knows where to go, in what order, where the others are, and that every movement is on record. AROBOTIX does the same for sites that mix people, robots, machines, and autonomous systems.</p>
         <div class="sol-list">
