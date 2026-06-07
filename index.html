@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AROBOTIX — The Coordination Layer for Modern Construction</title>
+<meta name="description" content="AROBOTIX is the neutral coordination and verification layer between the digital plan and the job site. It reads the model, sequences the work across humans and machines, and creates a defensible record of what was actually built." />
+
+<!-- Favicon -->
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+<link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<meta name="theme-color" content="#0a0a0a">
+
+<!-- Open Graph (link preview) -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AROBOTIX">
+<meta property="og:title" content="AROBOTIX — The Coordination Layer for Modern Construction">
+<meta property="og:description" content="The job site is going automated. AROBOTIX is the neutral coordination and verification layer between the digital plan and the field, so people can orchestrate humans and machines and keep a defensible record of what actually got built.">
+<meta property="og:url" content="https://www.arobotix.com/">
+<meta property="og:image" content="https://www.arobotix.com/arobotix-hero-poster.jpg">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="720">
+<meta property="og:image:alt" content="AROBOTIX — robots and machines on an automated construction site at night">
+
+<!-- Twitter / X card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AROBOTIX — The Coordination Layer for Modern Construction">
+<meta name="twitter:description" content="The neutral coordination and verification layer between the digital plan and the job site.">
+<meta name="twitter:image" content="https://www.arobotix.com/arobotix-hero-poster.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root{
+  --bg:#0a0a0a;
+  --bg-2:#0c1013;
+  --surface:#11171b;
+  --surface-2:#161d22;
+  --line:rgba(255,255,255,.08);
+  --line-2:rgba(255,255,255,.14);
+  --accent:#00d4ff;
+  --accent-deep:#0596b8;
+  --text:#eef3f6;
+  --muted:#8a959d;
+  --muted-2:#5e676e;
+  --danger:#ff5a6e;
+  --ok:#39d98a;
+  --maxw:1180px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'IBM Plex Sans',sans-serif;
+  font-weight:300;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+::selection{background:var(--accent);color:#03161c}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+
+/* ---------- type ---------- */
+.mono{font-family:'IBM Plex Mono',monospace}
+.eyebrow{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--accent);font-weight:500;
+}
+h1,h2,h3{font-family:'Chakra Petch',sans-serif;font-weight:700;line-height:1.04;letter-spacing:-.02em}
+h2{font-size:clamp(1.9rem,4.4vw,3.3rem)}
+h3{font-size:clamp(1.15rem,2vw,1.5rem);font-weight:700}
+.lead{font-size:clamp(1.02rem,1.5vw,1.22rem);color:var(--muted);font-weight:300;max-width:60ch}
+.accent{color:var(--accent)}
+.section{padding:clamp(70px,10vw,140px) 24px;position:relative}
+.wrap{max-width:var(--maxw);margin:0 auto}
+.divider{height:1px;background:linear-gradient(90deg,transparent,var(--line-2),transparent);max-width:var(--maxw);margin:0 auto}
+
+/* ---------- reveal ---------- */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+.reveal.d1{transition-delay:.08s}.reveal.d2{transition-delay:.16s}.reveal.d3{transition-delay:.24s}.reveal.d4{transition-delay:.32s}.reveal.d5{transition-delay:.4s}
+
+/* ---------- nav ---------- */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:16px 24px;
+  transition:background .4s,backdrop-filter .4s,border-color .4s;
+  border-bottom:1px solid transparent;
+}
+nav.scrolled{background:rgba(10,10,10,.72);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:11px;font-family:'Chakra Petch',sans-serif;font-weight:700;letter-spacing:.04em;font-size:1.15rem}
+.brand img{height:30px;width:auto;display:block}
+.navlinks{display:flex;gap:30px;align-items:center}
+.navlinks a{font-family:'IBM Plex Mono',monospace;font-size:.8rem;letter-spacing:.04em;color:var(--muted);transition:color .25s;position:relative}
+.navlinks a::after{content:"";position:absolute;left:0;bottom:-6px;height:1px;width:0;background:var(--accent);transition:width .3s}
+.navlinks a:hover{color:var(--text)}
+.navlinks a:hover::after{width:100%}
+.nav-cta{
+  font-family:'IBM Plex Mono',monospace;font-size:.78rem;letter-spacing:.04em;
+  border:1px solid var(--accent);color:var(--accent);padding:9px 18px;border-radius:2px;
+  transition:all .25s;
+}
+.nav-cta:hover{background:var(--accent);color:#03161c;box-shadow:0 0 24px rgba(0,212,255,.4)}
+@media(max-width:860px){.navlinks{display:none}}
+
+/* ---------- hero ---------- */
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden}
+.hero-media{position:absolute;inset:0;z-index:0}
+.hero-media video,.hero-media .poster{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+}
+.hero-media .poster{
+  background:#06090b url('arobotix-hero-poster.jpg') center/cover no-repeat;
+}
+.hero-media::after{
+  content:"";position:absolute;inset:0;
+  background:
+    radial-gradient(120% 80% at 75% 20%,rgba(0,212,255,.10),transparent 55%),
+    linear-gradient(180deg,rgba(10,10,10,.55) 0%,rgba(10,10,10,.35) 35%,rgba(10,10,10,.78) 78%,var(--bg) 100%),
+    linear-gradient(90deg,rgba(10,10,10,.85) 0%,rgba(10,10,10,.2) 55%,transparent 100%);
+}
+.hero-grid{position:absolute;inset:0;z-index:1;opacity:.5;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:64px 64px;
+  mask-image:radial-gradient(120% 90% at 30% 40%,#000 30%,transparent 75%);
+}
+.scan{position:absolute;left:0;right:0;height:1px;z-index:1;
+  background:linear-gradient(90deg,transparent,rgba(0,212,255,.55),transparent);
+  animation:scan 7s linear infinite;opacity:.5}
+@keyframes scan{0%{top:8%}100%{top:92%}}
+.hero-inner{position:relative;z-index:2;max-width:var(--maxw);margin:0 auto;width:100%;padding:0 24px}
+.hero-tag{display:flex;align-items:center;gap:14px;margin-bottom:26px}
+.hero-tag .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 14px var(--accent);animation:pulse 2.2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+.hero h1{font-size:clamp(2.6rem,8vw,6rem);max-width:16ch}
+.hero h1 .grad{
+  background:linear-gradient(100deg,var(--accent),#7eecff 60%,var(--accent));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.hero-sub{margin-top:30px;font-size:clamp(1.02rem,1.7vw,1.32rem);color:#cdd6dc;max-width:62ch;font-weight:300}
+.hero-sub b{color:var(--text);font-weight:600}
+.hero-actions{margin-top:42px;display:flex;gap:16px;flex-wrap:wrap}
+.btn{font-family:'IBM Plex Mono',monospace;font-size:.85rem;letter-spacing:.03em;padding:15px 28px;border-radius:3px;transition:all .25s;cursor:pointer;border:1px solid transparent;display:inline-flex;align-items:center;gap:10px}
+.btn-primary{background:var(--accent);color:#03161c;font-weight:600}
+.btn-primary:hover{box-shadow:0 0 30px rgba(0,212,255,.45);transform:translateY(-2px)}
+.btn-ghost{border-color:var(--line-2);color:var(--text)}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+.hero-strip{position:absolute;bottom:0;left:0;right:0;z-index:2;border-top:1px solid var(--line);background:rgba(8,8,8,.4);backdrop-filter:blur(6px)}
+.hero-strip .row{max-width:var(--maxw);margin:0 auto;display:flex;flex-wrap:wrap;gap:8px 30px;padding:16px 24px;font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.18em;color:var(--muted);text-transform:uppercase}
+.hero-strip .row span{display:flex;align-items:center;gap:30px}
+.hero-strip .row b{color:var(--accent);font-weight:500}
+.scroll-cue{position:absolute;bottom:64px;left:50%;transform:translateX(-50%);z-index:2;font-family:'IBM Plex Mono',monospace;font-size:.66rem;letter-spacing:.3em;color:var(--muted);text-transform:uppercase;display:flex;flex-direction:column;align-items:center;gap:8px;animation:bob 2.4s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,8px)}}
+@media(max-width:860px){.scroll-cue,.hero-strip{display:none}}
+
+/* ---------- cards ---------- */
+.grid{display:grid;gap:20px}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g2{grid-template-columns:repeat(2,1fr)}
+@media(max-width:860px){.g3,.g2{grid-template-columns:1fr}}
+.card{
+  background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:30px;
+  position:relative;overflow:hidden;transition:transform .35s,border-color .35s,background .35s;
+}
+.card::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:0;transition:opacity .35s}
+.card:hover{transform:translateY(-6px);border-color:var(--line-2);background:var(--surface-2)}
+.card:hover::before{opacity:1}
+.card .ic{width:42px;height:42px;border-radius:7px;display:flex;align-items:center;justify-content:center;background:rgba(0,212,255,.1);border:1px solid rgba(0,212,255,.25);margin-bottom:18px;color:var(--accent)}
+.card h3{margin-bottom:10px}
+.card p{color:var(--muted);font-size:.96rem}
+.idx{font-family:'IBM Plex Mono',monospace;color:var(--accent);font-size:.8rem;letter-spacing:.1em}
+
+/* ---------- problem ---------- */
+.gapbox{margin-top:34px;background:linear-gradient(135deg,rgba(0,212,255,.06),transparent);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:8px;padding:30px;display:grid;grid-template-columns:1.4fr 1fr;gap:30px}
+@media(max-width:860px){.gapbox{grid-template-columns:1fr}}
+.gapbox .big{font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:clamp(1.3rem,2.4vw,1.9rem);line-height:1.15;color:var(--accent)}
+
+/* ---------- solution diagram ---------- */
+.sol{display:grid;grid-template-columns:.85fr 1.15fr;gap:50px;align-items:center}
+@media(max-width:900px){.sol{grid-template-columns:1fr;gap:34px}}
+.flow{display:flex;flex-direction:column;gap:14px}
+.flow-node{border:1px solid var(--line);border-radius:8px;padding:18px 22px;text-align:center;background:var(--surface);transition:all .3s;position:relative}
+.flow-node .k{font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.flow-node .v{font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:1.25rem;margin-top:4px}
+.flow-node.core{border-color:var(--accent);background:linear-gradient(135deg,rgba(0,212,255,.12),rgba(0,212,255,.02));box-shadow:0 0 40px rgba(0,212,255,.12)}
+.flow-node.core .v{color:var(--accent)}
+.flow-node:hover{transform:scale(1.02);border-color:var(--line-2)}
+.flow-node.core:hover{box-shadow:0 0 60px rgba(0,212,255,.22)}
+.flow-arrow{text-align:center;color:var(--accent);font-size:1.1rem;opacity:.7}
+.flow-out{display:flex;gap:10px}
+.flow-out .chip{flex:1;border:1px solid var(--line);border-radius:7px;padding:12px;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:.78rem;color:var(--muted);transition:all .3s}
+.flow-out .chip:hover{border-color:var(--accent);color:var(--accent)}
+.sol-list{display:flex;flex-direction:column;gap:8px;margin-top:24px}
+.sol-list .it{display:flex;gap:16px;padding:16px 0;border-bottom:1px solid var(--line);transition:padding-left .3s}
+.sol-list .it:hover{padding-left:8px}
+.sol-list .it .n{font-family:'IBM Plex Mono',monospace;color:var(--accent);font-size:.8rem;min-width:30px;padding-top:3px}
+.sol-list .it h4{font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:1.02rem;margin-bottom:2px}
+.sol-list .it p{color:var(--muted);font-size:.9rem}
+
+/* ---------- flywheel / how ---------- */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media(max-width:860px){.steps{grid-template-columns:1fr}}
+.step{border:1px solid var(--line);border-radius:8px;padding:26px;background:var(--surface);transition:all .35s;cursor:default;position:relative;overflow:hidden}
+.step .num{font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:2.4rem;color:rgba(255,255,255,.07);position:absolute;top:14px;right:18px;transition:color .35s}
+.step:hover{border-color:var(--accent);transform:translateY(-5px);background:var(--surface-2)}
+.step:hover .num{color:rgba(0,212,255,.22)}
+.step h4{font-family:'Chakra Petch',sans-serif;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:10px}
+.step h4 .d{width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent)}
+.step p{color:var(--muted);font-size:.92rem}
+
+/* ---------- tech explorer ---------- */
+.tech-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:30px}
+.tech-tab{font-family:'IBM Plex Mono',monospace;font-size:.82rem;letter-spacing:.02em;padding:12px 18px;border:1px solid var(--line);border-radius:4px;color:var(--muted);cursor:pointer;transition:all .25s;background:transparent}
+.tech-tab:hover{color:var(--text);border-color:var(--line-2)}
+.tech-tab.active{color:#03161c;background:var(--accent);border-color:var(--accent);font-weight:600}
+.tech-panel{display:none;animation:fade .5s}
+.tech-panel.active{display:grid}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.tech-panel{grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+@media(max-width:900px){.tech-panel{grid-template-columns:1fr;gap:28px}}
+.tech-panel .ph{font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.2em;color:var(--accent);text-transform:uppercase;margin-bottom:14px;display:flex;gap:12px;align-items:center}
+.tech-panel .ph .pill{border:1px solid rgba(0,212,255,.4);border-radius:20px;padding:3px 12px;font-size:.66rem}
+.tech-panel h3{font-size:clamp(1.4rem,2.6vw,2rem);margin-bottom:14px}
+.tech-panel p{color:var(--muted);margin-bottom:14px}
+.tech-spec{border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--surface)}
+.tech-spec .hd{font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);padding:14px 18px;border-bottom:1px solid var(--line);background:var(--bg-2)}
+.tech-spec .li{display:flex;justify-content:space-between;gap:16px;padding:14px 18px;border-bottom:1px solid var(--line);font-size:.88rem}
+.tech-spec .li:last-child{border-bottom:none}
+.tech-spec .li .key{color:var(--muted);font-family:'IBM Plex Mono',monospace;font-size:.8rem}
+.tech-spec .li .val{color:var(--text);text-align:right}
+.codeblock{font-family:'IBM Plex Mono',monospace;font-size:.78rem;line-height:1.8;color:var(--muted);background:var(--bg-2);border:1px solid var(--line);border-radius:8px;padding:20px;overflow:auto}
+.codeblock .c{color:var(--muted-2)}
+.codeblock .k{color:var(--accent)}
+.codeblock .s{color:#9fe6b3}
+
+/* ---------- compare table ---------- */
+.ctable{width:100%;border-collapse:collapse;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.ctable th{font-family:'IBM Plex Mono',monospace;font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;text-align:left;padding:18px 22px;border-bottom:1px solid var(--line)}
+.ctable th.ax{color:var(--accent)}
+.ctable td{padding:18px 22px;border-bottom:1px solid var(--line);font-size:.94rem;vertical-align:top}
+.ctable tr:last-child td{border-bottom:none}
+.ctable tr{transition:background .25s}
+.ctable tbody tr:hover{background:rgba(0,212,255,.04)}
+.ctable .old{color:var(--muted)}
+.ctable .new{color:var(--text)}
+.ctable .new::before{content:"→ ";color:var(--accent)}
+
+/* ---------- market / charts ---------- */
+.mstats{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:18px;margin-bottom:46px}
+.mstat{border:1px solid var(--line);border-radius:8px;padding:28px;background:var(--surface);transition:all .35s}
+.mstat:hover{border-color:var(--accent);transform:translateY(-4px)}
+.mstat .v{font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:clamp(2.2rem,4.5vw,3.2rem);color:var(--text);line-height:1}
+.mstat .l{color:var(--accent);font-weight:500;margin-top:10px}
+.mstat .s{color:var(--muted);font-size:.85rem;margin-top:4px}
+.charts{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media(max-width:860px){.charts{grid-template-columns:1fr}}
+.chartcard{border:1px solid var(--line);border-radius:8px;padding:26px;background:var(--surface)}
+.chartcard h4{font-family:'Chakra Petch',sans-serif;font-weight:700;margin-bottom:6px}
+.chartcard .cap{color:var(--muted);font-size:.84rem;margin-bottom:18px}
+.chartwrap{position:relative;height:240px}
+
+/* ---------- audience toggle ---------- */
+.aud-switch{display:inline-flex;border:1px solid var(--line);border-radius:6px;overflow:hidden;margin-bottom:34px}
+.aud-switch button{font-family:'IBM Plex Mono',monospace;font-size:.82rem;padding:13px 24px;background:transparent;color:var(--muted);border:none;cursor:pointer;transition:all .25s}
+.aud-switch button.active{background:var(--accent);color:#03161c;font-weight:600}
+.aud-view{display:none}
+.aud-view.active{display:block;animation:fade .5s}
+
+/* ---------- moat ---------- */
+.flywheel{display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin:30px 0;font-family:'IBM Plex Mono',monospace;font-size:.86rem}
+.flywheel .fw{border:1px solid var(--line);border-radius:30px;padding:11px 20px;transition:all .3s}
+.flywheel .fw:hover{border-color:var(--accent);color:var(--accent);box-shadow:0 0 20px rgba(0,212,255,.18)}
+.flywheel .ar{color:var(--accent)}
+
+/* ---------- team ---------- */
+.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media(max-width:860px){.team-grid{grid-template-columns:1fr}}
+.adv-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:18px}
+@media(max-width:860px){.adv-grid{grid-template-columns:1fr}}
+.member .role{color:var(--accent);font-family:'IBM Plex Mono',monospace;font-size:.78rem;letter-spacing:.04em;margin:2px 0 10px}
+
+/* ---------- CTA ---------- */
+.cta{background:linear-gradient(180deg,var(--bg),#06090b);border-top:1px solid var(--line);text-align:center;position:relative;overflow:hidden}
+.cta::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 80% at 50% 0%,rgba(0,212,255,.1),transparent 60%)}
+.cta .wrap{position:relative;z-index:1}
+.cta h2{font-size:clamp(2.2rem,6vw,4.4rem);max-width:18ch;margin:0 auto}
+.cta h2 .grad{background:linear-gradient(100deg,var(--accent),#7eecff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.contact{display:flex;gap:22px;justify-content:center;flex-wrap:wrap;margin-top:34px;font-family:'IBM Plex Mono',monospace;font-size:.86rem;color:var(--muted)}
+.contact a:hover{color:var(--accent)}
+
+/* ---------- footer ---------- */
+footer{border-top:1px solid var(--line);padding:34px 24px;background:var(--bg)}
+footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;font-family:'IBM Plex Mono',monospace;font-size:.74rem;color:var(--muted-2);letter-spacing:.04em}
+
+.note{font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--muted-2);letter-spacing:.06em;margin-top:14px}
+ul.tick{list-style:none;margin-top:18px;display:flex;flex-direction:column;gap:12px}
+ul.tick li{display:flex;gap:12px;color:var(--muted);font-size:.95rem}
+ul.tick li::before{content:"▪";color:var(--accent);font-size:.7rem;margin-top:7px}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a class="brand" href="#top">
+    <img src="arobotix-logo-white.png" alt="AROBOTIX logo">
+    AROBOTIX
+  </a>
+  <div class="navlinks">
+    <a href="#why">Why Now</a>
+    <a href="#solution">What It Does</a>
+    <a href="#tech">Technology</a>
+    <a href="#market">Market</a>
+    <a href="#audience">For You</a>
+    <a href="#team">Team</a>
+  </div>
+  <a class="nav-cta" href="#contact">Get in touch</a>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="top">
+  <div class="hero-media">
+    <div class="poster"></div>
+    <video autoplay muted loop playsinline poster="arobotix-hero-poster.jpg">
+      <source src="arobotix-hero.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="hero-grid"></div>
+  <div class="scan"></div>
+
+  <div class="hero-inner">
+    <div class="hero-tag reveal in">
+      <span class="dot"></span>
+      <span class="eyebrow">BIM · DfMA · Robotics · AI-Assist · Construction Governance</span>
+    </div>
+    <h1 class="reveal in d1">The job site is going<br>automated.<br><span class="grad">Someone has to coordinate it.</span></h1>
+    <p class="hero-sub reveal in d2">
+      Robots and autonomous machines are arriving on construction sites. AROBOTIX is the
+      <b>neutral coordination and verification layer</b> that sits between the digital plan and the field,
+      so people can orchestrate humans and machines, confirm what is ready, and keep a defensible record of what actually got built.
+    </p>
+    <div class="hero-actions reveal in d3">
+      <a class="btn btn-primary" href="#solution">See how it works <span>→</span></a>
+      <a class="btn btn-ghost" href="#audience">For contractors &amp; investors</a>
+    </div>
+  </div>
+
+  <div class="scroll-cue">scroll<span>↓</span></div>
+  <div class="hero-strip">
+    <div class="row">
+      <span>STATUS <b>PRE-SEED</b></span>
+      <span>ENTITY <b>DELAWARE C-CORP</b></span>
+      <span>BUILD <b>HO CHI MINH CITY, VN</b></span>
+      <span>PILOT <b>HOA BINH CONSTRUCTION</b></span>
+    </div>
+  </div>
+</header>
+
+<!-- PROBLEM -->
+<section class="section" id="problem">
+  <div class="wrap">
+    <div class="eyebrow reveal">The Problem</div>
+    <h2 class="reveal d1" style="margin-top:14px;max-width:20ch">The world spends <span class="accent">$16 trillion</span> a year building things. The execution still runs on phone calls.</h2>
+    <p class="lead reveal d2" style="margin-top:20px">Most projects go over budget and behind schedule, not because the plans were wrong, but because no one can reliably coordinate and verify what happens on site.</p>
+
+    <div class="grid g3" style="margin-top:46px">
+      <div class="card reveal">
+        <div class="ic">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h16v16H4z"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>
+        </div>
+        <h3>The plans exist</h3>
+        <p>Architects and engineers model every building in detail before a single hole is dug.</p>
+      </div>
+      <div class="card reveal d1">
+        <div class="ic">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.2"/><path d="M3 20c0-3 2.7-5 6-5s6 2 6 5M15 20c0-2 1.5-3.5 4-3.5"/></svg>
+        </div>
+        <h3>The people exist</h3>
+        <p>Skilled crews and contractors are ready, experienced, and accountable for the work.</p>
+      </div>
+      <div class="card reveal d2">
+        <div class="ic">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="9" width="14" height="10" rx="2"/><path d="M12 9V5M9 5h6M9 14h.01M15 14h.01"/></svg>
+        </div>
+        <h3>The robots are arriving</h3>
+        <p>Automation is showing up on job sites worldwide, and the trend only accelerates.</p>
+      </div>
+    </div>
+
+    <div class="gapbox reveal d1">
+      <div>
+        <h3 style="margin-bottom:12px">Between the perfect plan and the real site, there is a gap.</h3>
+        <p style="color:var(--muted)">No one decides which machine does what, when, and in what order alongside the others. There is no trusted record that the work actually happened. When errors and disputes occur, there is no reliable trail to follow. That gap costs the industry hundreds of billions of dollars a year.</p>
+      </div>
+      <div style="display:flex;align-items:center">
+        <div class="big">Robots are the unpredictable physical element that needs coordination, sequencing, and verification.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- WHY NOW -->
+<section class="section" id="why">
+  <div class="wrap">
+    <div class="eyebrow reveal">Why Now</div>
+    <h2 class="reveal d1" style="margin-top:14px;max-width:22ch">Three forces are colliding. For the first time, the coordination layer is both <span class="accent">possible and necessary.</span></h2>
+
+    <div class="grid g3" style="margin-top:46px">
+      <div class="card reveal">
+        <span class="idx">01</span>
+        <h3 style="margin-top:8px">Robots are on site now</h3>
+        <p>Construction robotics is on track to grow from $1.4B to $3.66B by 2030, a 17.1% annual rate. But robots without coordination are expensive islands. They need a layer that can read the plan and connect them.</p>
+      </div>
+      <div class="card reveal d1">
+        <span class="idx">02</span>
+        <h3 style="margin-top:8px">Digital plans hit critical mass</h3>
+        <p>Major projects now run on detailed BIM models before construction starts. Advances in AI and machine learning make those models readable, analyzable, and decomposable into work.</p>
+      </div>
+      <div class="card reveal d2">
+        <span class="idx">03</span>
+        <h3 style="margin-top:8px">Projects keep getting more complex</h3>
+        <p>The industry is expanding in volume, speed, and scale. More complexity demands faster completion, higher quality, and better safety, which manual coordination cannot keep up with.</p>
+      </div>
+    </div>
+
+    <div class="charts" style="margin-top:24px">
+      <div class="chartcard reveal">
+        <h4>Construction robotics market</h4>
+        <div class="cap">Projected growth, USD billions · 17.1% CAGR</div>
+        <div class="chartwrap"><canvas id="roboChart"></canvas></div>
+      </div>
+      <div class="chartcard reveal d1">
+        <h4>Capital is accelerating</h4>
+        <div class="cap">AEC tech investment, Q2 by year, USD billions</div>
+        <div class="chartwrap"><canvas id="capChart"></canvas></div>
+      </div>
+    </div>
+    <p class="note reveal">Figures reproduced from AROBOTIX market research in the information deck. Verify current sources before external publication.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SOLUTION -->
+<section class="section" id="solution">
+  <div class="wrap">
+    <div class="eyebrow reveal">What It Does</div>
+    <h2 class="reveal d1" style="margin-top:14px;max-width:18ch">One layer. Between the plan and the site. <span class="accent">Coordinating everything.</span></h2>
+
+    <div class="sol" style="margin-top:50px">
+      <div class="reveal">
+        <div class="flow">
+          <div class="flow-node"><div class="k">Input</div><div class="v">Digital Plan (BIM)</div></div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-node core"><div class="k">Coordination Layer</div><div class="v">AROBOTIX</div><div class="k" style="margin-top:6px;color:var(--accent)">Coordination &amp; Verification</div></div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-node"><div class="k">Execution Output</div><div class="v">The Job Site</div></div>
+          <div class="flow-arrow">↓</div>
+          <div class="flow-out">
+            <div class="chip">Humans</div>
+            <div class="chip">Robots</div>
+            <div class="chip">Systems</div>
+          </div>
+        </div>
+      </div>
+      <div class="reveal d1">
+        <h3 style="color:var(--accent);font-family:'Chakra Petch';font-weight:700;font-size:1.2rem;margin-bottom:14px">Think of it as air-traffic control for construction execution.</h3>
+        <p class="lead">Air-traffic control does not fly the planes. It makes sure every aircraft knows where to go, in what order, where the others are, and that every movement is on record. AROBOTIX does the same for sites that mix people, robots, machines, and autonomous systems.</p>
+        <div class="sol-list">
+          <div class="it"><div class="n">01</div><div><h4>Reads the plan</h4><p>Ingests the digital construction model and converts it into clear, actionable tasks.</p></div></div>
+          <div class="it"><div class="n">02</div><div><h4>Coordinates the work</h4><p>Sequences tasks for the right human or machine, in the right order, with full context.</p></div></div>
+          <div class="it"><div class="n">03</div><div><h4>Verifies execution</h4><p>Creates a real-time, defensible record of what was done, by whom, and when.</p></div></div>
+          <div class="it"><div class="n">04</div><div><h4>Works with everything</h4><p>Robot-agnostic and vendor-neutral. It connects hardware and platforms, it does not replace them.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- HOW IT WORKS -->
+<section class="section" id="how">
+  <div class="wrap">
+    <div class="eyebrow reveal">How It Works</div>
+    <h2 class="reveal d1" style="margin-top:14px">Read the plan → break it down → coordinate → verify → <span class="accent">get smarter.</span></h2>
+
+    <div class="steps" style="margin-top:46px">
+      <div class="step reveal"><div class="num">01</div><h4><span class="d"></span>Read the plan</h4><p>Ingests the digital construction model, the complete blueprint for the building.</p></div>
+      <div class="step reveal d1"><div class="num">02</div><h4><span class="d"></span>Break into tasks</h4><p>Converts the complex model into specific, sequenced actions for humans or machines.</p></div>
+      <div class="step reveal d2"><div class="num">03</div><h4><span class="d"></span>Coordinate readiness</h4><p>Before anything starts, confirms the right people, materials, and machines are in place.</p></div>
+      <div class="step reveal"><div class="num">04</div><h4><span class="d"></span>Execute</h4><p>People and machines do the work. AROBOTIX provides real-time context and sequencing.</p></div>
+      <div class="step reveal d1"><div class="num">05</div><h4><span class="d"></span>Confirm &amp; record</h4><p>Every completed task generates a verified, time-stamped Proof-of-Work record.</p></div>
+      <div class="step reveal d2"><div class="num">06</div><h4><span class="d"></span>Learn</h4><p>Insights from each project feed the next, improving coordination accuracy over time.</p></div>
+    </div>
+    <p class="note reveal">Human review and final accountability stay with the contractor at every step. AROBOTIX supports judgment, it does not replace it.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- TECHNOLOGY -->
+<section class="section" id="tech" style="background:linear-gradient(180deg,var(--bg),#070a0c 50%,var(--bg))">
+  <div class="wrap">
+    <div class="eyebrow reveal">The Technology</div>
+    <h2 class="reveal d1" style="margin-top:14px;max-width:22ch">The platforms we are building, in the order they have to be built.</h2>
+    <p class="lead reveal d2" style="margin-top:18px">AROBOTIX is an AI-native system with engineered guardrails. The wedge is a compiler that turns models into structured, verifiable work. Everything else is built on top of it.</p>
+
+    <div class="tech-tabs reveal d2" style="margin-top:40px" id="techTabs">
+      <button class="tech-tab active" data-tab="0">01 / BIM-to-Task Compiler</button>
+      <button class="tech-tab" data-tab="1">02 / CTOM Schema</button>
+      <button class="tech-tab" data-tab="2">03 / Proof-of-Work</button>
+      <button class="tech-tab" data-tab="3">04 / Execution Data Graph</button>
+      <button class="tech-tab" data-tab="4">05 / Orchestration &amp; AI-Assist</button>
+    </div>
+
+    <!-- panel 0 -->
+    <div class="tech-panel active" data-panel="0">
+      <div>
+        <div class="ph">Foundational wedge <span class="pill">Compiler before UI</span></div>
+        <h3>BIM-to-Executable Task Compiler</h3>
+        <p>The first critical system. It reads the digital model and compiles it into structured execution tasks, with readiness validation, sequencing, and dependency mapping built in. It turns drawings into instructions without dictating means and methods.</p>
+        <p>In the Crawl phase, classification is rule-based, which is sufficient and more defensible for the pilot than a black-box model. The output is clear, verifiable, trackable tasks.</p>
+        <ul class="tick">
+          <li>Readiness validation logic and dependency mapping</li>
+          <li>Sequencing options, not sequencing commands</li>
+          <li>Revit support via Autodesk Platform Services, open BIM via IFC</li>
+        </ul>
+      </div>
+      <div>
+        <div class="codeblock">
+<span class="c"># BIM model → structured executable tasks</span><br>
+<span class="k">task</span> = compiler.<span class="k">compile</span>(model=<span class="s">"tower_L12.ifc"</span>)<br><br>
+{<br>
+&nbsp;&nbsp;<span class="k">"task_id"</span>: <span class="s">"STR-V-0421"</span>,<br>
+&nbsp;&nbsp;<span class="k">"group"</span>: <span class="s">"STRUCTURE-VERTICAL"</span>,<br>
+&nbsp;&nbsp;<span class="k">"readiness"</span>: [<span class="s">"rebar_set"</span>, <span class="s">"formwork_ok"</span>],<br>
+&nbsp;&nbsp;<span class="k">"depends_on"</span>: [<span class="s">"FND-0188"</span>],<br>
+&nbsp;&nbsp;<span class="k">"assignable_to"</span>: [<span class="s">"human"</span>, <span class="s">"machine"</span>],<br>
+&nbsp;&nbsp;<span class="k">"verify"</span>: <span class="s">"proof_of_work"</span><br>
+}
+        </div>
+      </div>
+    </div>
+
+    <!-- panel 1 -->
+    <div class="tech-panel" data-panel="1">
+      <div>
+        <div class="ph">Architecture <span class="pill">Locked first</span></div>
+        <h3>Construction Task Object Model (CTOM)</h3>
+        <p>The schema that everything else depends on. CTOM is organized by execution pattern, not trade name, so the same logic generalizes across projects. Each group carries its own readiness prerequisites, verification requirements, and dependency structure.</p>
+        <p>Getting this schema right is the difference between a system that compounds and one that breaks on the second project.</p>
+      </div>
+      <div class="tech-spec">
+        <div class="hd">10 execution-pattern field groups</div>
+        <div class="li"><span class="key">01</span><span class="val">Site-Civil</span></div>
+        <div class="li"><span class="key">02</span><span class="val">Foundations</span></div>
+        <div class="li"><span class="key">03</span><span class="val">Structure-Vertical</span></div>
+        <div class="li"><span class="key">04</span><span class="val">Structure-Horizontal</span></div>
+        <div class="li"><span class="key">05</span><span class="val">Envelope</span></div>
+        <div class="li"><span class="key">06</span><span class="val">MEP-Rough</span></div>
+        <div class="li"><span class="key">07</span><span class="val">Interiors-Construction</span></div>
+        <div class="li"><span class="key">08</span><span class="val">Finishes</span></div>
+        <div class="li"><span class="key">09</span><span class="val">MEP-Finish</span></div>
+        <div class="li"><span class="key">10</span><span class="val">Specialty-Systems</span></div>
+      </div>
+    </div>
+
+    <!-- panel 2 -->
+    <div class="tech-panel" data-panel="2">
+      <div>
+        <div class="ph">Hero output <span class="pill">Pilot deliverable</span></div>
+        <h3>Proof-of-Work Record</h3>
+        <p>A structured, confidence-tagged record that a task was executed: the time, the machines, the conditions, and the human confirmation, all traceable. It is a defensive record and a dispute-reduction layer.</p>
+        <p>It is not automated QA signoff, legal certification, or fault assignment. Human review and final accountability stay central. When a question comes up months later, the verified record surfaces in seconds, before it becomes a claim.</p>
+        <ul class="tick">
+          <li>Confidence-tagged, time-stamped, traceable</li>
+          <li>Built around contractor authority, not against it</li>
+          <li>Turns disputes into lookups</li>
+        </ul>
+      </div>
+      <div class="tech-spec">
+        <div class="hd">Record · concrete pour confirmed</div>
+        <div class="li"><span class="key">task</span><span class="val">STR-H-0912 · slab pour L12</span></div>
+        <div class="li"><span class="key">timestamp</span><span class="val">2026-08-04 10:03 ICT</span></div>
+        <div class="li"><span class="key">assets</span><span class="val">pump-02, vibrator-04</span></div>
+        <div class="li"><span class="key">conditions</span><span class="val">31°C · slump verified</span></div>
+        <div class="li"><span class="key">confirmed_by</span><span class="val">site supervisor</span></div>
+        <div class="li"><span class="key">confidence</span><span class="val" style="color:var(--accent)">HIGH · 0.94</span></div>
+      </div>
+    </div>
+
+    <!-- panel 3 -->
+    <div class="tech-panel" data-panel="3">
+      <div>
+        <div class="ph">The moat <span class="pill">Compounding</span></div>
+        <h3>Execution Data Graph</h3>
+        <p>Every project we run produces a dataset no competitor can replicate: the first verified, confidence-tagged record of how construction actually happens at task level. It grows with every build and gets harder to replicate with every cycle.</p>
+        <p>Features can be copied. Operational intelligence compounds. The graph powers benchmarking, risk prediction, and the pattern recognition that makes the next project's coordination smarter.</p>
+      </div>
+      <div>
+        <div class="flywheel" style="flex-direction:column;align-items:flex-start">
+          <span class="fw">Better coordination</span>
+          <span class="ar">↓</span>
+          <span class="fw">Cleaner execution data</span>
+          <span class="ar">↓</span>
+          <span class="fw">Smarter coordination</span>
+          <span class="ar">↓</span>
+          <span class="fw">Stronger network effects</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- panel 4 -->
+    <div class="tech-panel" data-panel="4">
+      <div>
+        <div class="ph">Neutral infrastructure <span class="pill">Robot-agnostic</span></div>
+        <h3>Orchestration &amp; AI-Assist</h3>
+        <p>A neutral intelligence layer that delivers contextual insight across different robots and applications. It captures real-time execution data, sequences work to site conditions, and answers project questions by citing the underlying project data.</p>
+        <p>AI assists task decomposition with human validation checkpoints throughout. Every robot vendor owns its silo. No one orchestrates across all of them. That neutral position is the strategic advantage, and taking sides with any OEM would destroy it.</p>
+        <ul class="tick">
+          <li>Robot-agnostic APIs and partner integrations, no hardware lock-in</li>
+          <li>AI-assisted decomposition with human checkpoints</li>
+          <li>Answers cite project data, not guesses</li>
+        </ul>
+      </div>
+      <div class="tech-spec">
+        <div class="hd">Stack</div>
+        <div class="li"><span class="key">api</span><span class="val">FastAPI</span></div>
+        <div class="li"><span class="key">data</span><span class="val">PostgreSQL</span></div>
+        <div class="li"><span class="key">cloud</span><span class="val">AWS</span></div>
+        <div class="li"><span class="key">bim_revit</span><span class="val">Autodesk Platform Services</span></div>
+        <div class="li"><span class="key">bim_open</span><span class="val">IFC schema</span></div>
+        <div class="li"><span class="key">classify</span><span class="val">Uniclass · OmniClass</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- DIFFERENTIATION -->
+<section class="section" id="diff">
+  <div class="wrap">
+    <div class="eyebrow reveal">Why It's Different</div>
+    <h2 class="reveal d1" style="margin-top:14px">They build tools. We build the layer the tools run on.</h2>
+    <p class="lead reveal d2" style="margin-top:18px">Every company in this space solves one part of the problem and stops. No one connects them. No one coordinates execution in real time. No one produces verified proof of what happened.</p>
+
+    <table class="ctable reveal d1" style="margin-top:40px">
+      <thead><tr><th>Traditional tools</th><th class="ax">AROBOTIX</th></tr></thead>
+      <tbody>
+        <tr><td class="old">Single-task automation</td><td class="new">An entire execution coordination layer</td></tr>
+        <tr><td class="old">Vendor-specific hardware silos</td><td class="new">Works with any robot, hardware, or platform</td></tr>
+        <tr><td class="old">Fragmented, manual coordination</td><td class="new">Unified, real-time orchestration</td></tr>
+        <tr><td class="old">Manual paper trails</td><td class="new">Verified, time-stamped digital records</td></tr>
+        <tr><td class="old">Static project data</td><td class="new">A system that learns with every build</td></tr>
+        <tr><td class="old">Generic AI platforms</td><td class="new">AI grounded in verified project data</td></tr>
+      </tbody>
+    </table>
+
+    <div class="grid g2" style="margin-top:24px">
+      <div class="card reveal">
+        <h3>Human-first by design</h3>
+        <p>Humans remain the final decision-makers. The reason general contractors will trust this system is the same reason they cannot easily rip it out: it is built around their authority, not against it. That is critical for adoption, liability, and trust.</p>
+      </div>
+      <div class="card reveal d1">
+        <h3>Neutral, so it compounds</h3>
+        <p>AROBOTIX sits above the tool stack and connects it. Procore manages projects. Autodesk owns design. Trimble captures field data. Robotics vendors build single-task hardware. None of them coordinate execution across all of it. That is the gap.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- MARKET -->
+<section class="section" id="market">
+  <div class="wrap">
+    <div class="eyebrow reveal">Market Opportunity</div>
+    <h2 class="reveal d1" style="margin-top:14px;max-width:24ch">The largest industry on earth. The least digitized. And no one has built the coordination layer. <span class="accent">Yet.</span></h2>
+
+    <div class="mstats" style="margin-top:46px">
+      <div class="mstat reveal"><div class="v">$16.45T</div><div class="l">Global Construction Market</div><div class="s">Total Addressable Market</div></div>
+      <div class="mstat reveal d1"><div class="v">$164B+</div><div class="l">Construction Tech Market</div><div class="s">Serviceable Addressable Market</div></div>
+      <div class="mstat reveal d2"><div class="v">$9.17B</div><div class="l">AEC Software Market</div><div class="s">Immediate opportunity · 9.7% CAGR</div></div>
+      <div class="mstat reveal d3"><div class="v">$3.66B</div><div class="l">Construction Robotics</div><div class="s">By 2030 · 17.1% CAGR · the layer we coordinate</div></div>
+    </div>
+
+    <div class="charts">
+      <div class="chartcard reveal">
+        <h4>Market sizing</h4>
+        <div class="cap">Log scale, USD · TAM → SAM → immediate opportunity</div>
+        <div class="chartwrap"><canvas id="marketChart"></canvas></div>
+      </div>
+      <div class="chartcard reveal d1">
+        <h4>The insight</h4>
+        <div class="cap" style="margin-bottom:18px">Why the gap is the opportunity</div>
+        <p style="color:var(--muted);font-size:.95rem">Every other complex industry, logistics, manufacturing, healthcare, has an operating system that reads intent, breaks it into tasks, routes work to humans and machines, closes the loop, and learns.</p>
+        <p style="color:var(--text);font-size:.95rem;margin-top:14px;font-weight:500">Construction still runs on PDFs, phone calls, and tribal knowledge. The construction industry has a potential <span class="accent">$2T coordination layer</span> that does not exist yet.</p>
+      </div>
+    </div>
+    <p class="note reveal">Market figures reproduced from the AROBOTIX information deck. Sources should be re-verified before public release.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- AUDIENCE -->
+<section class="section" id="audience" style="background:linear-gradient(180deg,var(--bg),#070a0c 50%,var(--bg))">
+  <div class="wrap">
+    <div class="eyebrow reveal">For Contractors</div>
+    <h2 class="reveal d1" style="margin-top:14px;margin-bottom:30px">Built for the people who run the work.</h2>
+
+    <div class="sol" style="grid-template-columns:1fr 1fr">
+      <div class="reveal d2">
+        <h3 style="margin-bottom:14px">A Monday morning, with AROBOTIX</h3>
+        <ul class="tick">
+          <li><b style="color:var(--text)">6:55 AM.</b> The foreman opens AROBOTIX. Readiness across crews, machines, and systems is confirmed. The day's sequence is set before the briefing starts.</li>
+          <li><b style="color:var(--text)">10:00 AM.</b> A pour completes. The time, machines, conditions, and supervisor confirmation are recorded instantly. Proof-of-Work, tagged and defensible.</li>
+          <li><b style="color:var(--text)">6 months later.</b> A dispute surfaces. The verified record appears in seconds. It is resolved before it becomes a claim.</li>
+        </ul>
+      </div>
+      <div class="reveal d3">
+        <h3 style="margin-bottom:14px">What you get</h3>
+        <ul class="tick">
+          <li>Lower coordination overhead and fewer lost mornings</li>
+          <li>A defensible record that reduces dispute and rework exposure</li>
+          <li>No hardware lock-in: it works with the robots and tools you already use</li>
+          <li>Your team keeps authority. The platform supports decisions, it does not make them</li>
+          <li>Lowest entry barrier: per-site fees on a free, structured pilot</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ROADMAP -->
+<section class="section" id="roadmap">
+  <div class="wrap">
+    <div class="eyebrow reveal">Go-To-Market</div>
+    <h2 class="reveal d1" style="margin-top:14px">Long sales cycles demand early credibility. <span class="accent">Pilot before scale.</span></h2>
+    <div class="grid g3" style="margin-top:46px">
+      <div class="card reveal">
+        <div class="ph" style="font-family:'IBM Plex Mono';color:var(--accent);font-size:.74rem;letter-spacing:.18em;margin-bottom:10px">CRAWL · NOW – 8 MO</div>
+        <h3>Foundation</h3>
+        <ul class="tick">
+          <li>Complete the BIM-to-Task Compiler</li>
+          <li>File key patents</li>
+          <li>Secure two pilot GC partners</li>
+          <li>Run the Proof of Concept on a live Hoa Binh site</li>
+        </ul>
+      </div>
+      <div class="card reveal d1">
+        <div class="ph" style="font-family:'IBM Plex Mono';color:var(--accent);font-size:.74rem;letter-spacing:.18em;margin-bottom:10px">WALK · 8 – 12 MO</div>
+        <h3>Pilot</h3>
+        <ul class="tick">
+          <li>Launch the Proof-of-Work system</li>
+          <li>Onboard first paying enterprise clients</li>
+          <li>Build the government and infrastructure pipeline</li>
+        </ul>
+      </div>
+      <div class="card reveal d2">
+        <div class="ph" style="font-family:'IBM Plex Mono';color:var(--accent);font-size:.74rem;letter-spacing:.18em;margin-bottom:10px">RUN · 12 – 24 MO</div>
+        <h3>Scale</h3>
+        <ul class="tick">
+          <li>Full platform deployment</li>
+          <li>OEM integrations live</li>
+          <li>Expand to SEA, US, and Middle East</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- TEAM -->
+<section class="section" id="team">
+  <div class="wrap">
+    <div class="eyebrow reveal">The Team</div>
+    <h2 class="reveal d1" style="margin-top:14px">The right people, built for exactly this problem.</h2>
+
+    <div class="team-grid" style="margin-top:46px">
+      <div class="card member reveal">
+        <h3>Han Hoang</h3>
+        <div class="role">Founder &amp; CEO</div>
+        <p>MIT, 25+ years in BIM, DfMA, VDC, and automated construction workflows. BIMForum DfMA Working Group (USA) and BIM Steering Committee (Vietnam).</p>
+      </div>
+      <div class="card member reveal d1">
+        <h3>Sahil Harriram</h3>
+        <div class="role">CTO &amp; Co-founder</div>
+        <p>Builds the core platform: field data ingestion, confidence tagging, and the record integrity layer.</p>
+      </div>
+      <div class="card member reveal d2">
+        <h3>Maryline Vo</h3>
+        <div class="role">Chief Operating Officer</div>
+        <p>Manages team deployment and operational scaling across Vietnam and SEA.</p>
+      </div>
+    </div>
+
+    <div class="eyebrow reveal" style="margin-top:46px">Advisors</div>
+    <div class="adv-grid" style="grid-template-columns:repeat(auto-fit,minmax(230px,1fr));margin-top:20px">
+      <div class="card member reveal">
+        <h3>Jim Bedrick, FAIA</h3>
+        <div class="role">Industry Advisor</div>
+        <p>Co-author of the BIMForum LOD Specification. Deep expertise in digital construction standards.</p>
+      </div>
+      <div class="card member reveal d1">
+        <h3>Kristijan Vilibić</h3>
+        <div class="role">Technology Advisor</div>
+        <p>AEC researcher, University of Zagreb. AI, computational design, and digital construction.</p>
+      </div>
+      <div class="card member reveal d2">
+        <h3>Louis Nguyen</h3>
+        <div class="role">Finance &amp; Investment Advisor</div>
+        <p>Financial strategy, capital structure, and investment guidance.</p>
+      </div>
+      <div class="card member reveal d3">
+        <h3>Binh Tran</h3>
+        <div class="role">Strategy Advisor</div>
+        <p>Venture and market strategy across Vietnam and Southeast Asia.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section cta" id="contact">
+  <div class="wrap">
+    <div class="eyebrow reveal" style="text-align:center">The Future</div>
+    <h2 class="reveal d1" style="margin-top:18px">The next big construction platform won't build.<br><span class="grad">It will orchestrate.</span></h2>
+    <div class="hero-actions reveal d2" style="justify-content:center;margin-top:38px">
+      <a class="btn btn-primary" href="mailto:info@arobotix.com">Talk to us <span>→</span></a>
+      <a class="btn btn-ghost" href="https://www.arobotix.com" target="_blank" rel="noopener">www.arobotix.com</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span style="display:flex;align-items:center;gap:12px"><img src="arobotix-logo-white.png" alt="AROBOTIX" style="height:30px;width:auto;opacity:.85">AROBOTIX CORP. · DELAWARE C-CORP · HO CHI MINH CITY</span>
+    <span>BIM · DfMA · ROBOTICS · AUTOMATION · AI-ASSIST · GOVERNANCE</span>
+    <span>© 2026 · CONFIDENTIAL</span>
+  </div>
+</footer>
+
+<script>
+/* nav scroll */
+const nav=document.getElementById('nav');
+addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>40));
+
+/* reveal */
+const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
+document.querySelectorAll('.reveal:not(.in)').forEach(el=>io.observe(el));
+
+/* tech tabs */
+const tabs=document.querySelectorAll('.tech-tab'),panels=document.querySelectorAll('.tech-panel');
+tabs.forEach(t=>t.addEventListener('click',()=>{
+  tabs.forEach(x=>x.classList.remove('active'));panels.forEach(p=>p.classList.remove('active'));
+  t.classList.add('active');document.querySelector('.tech-panel[data-panel="'+t.dataset.tab+'"]').classList.add('active');
+}));
+
+/* charts */
+const AX='#00d4ff', GRID='rgba(255,255,255,.06)', MUT='#8a959d';
+Chart.defaults.font.family="'IBM Plex Mono', monospace";
+Chart.defaults.color=MUT;
+Chart.defaults.font.size=11;
+
+function grad(ctx,c){const g=ctx.createLinearGradient(0,0,0,240);g.addColorStop(0,c+'66');g.addColorStop(1,c+'00');return g;}
+
+new Chart(document.getElementById('roboChart'),{
+  type:'line',
+  data:{labels:['2024','2026','2028','2030'],datasets:[{data:[1.4,2.0,2.8,3.66],borderColor:AX,backgroundColor:(c)=>grad(c.chart.ctx,'#00d4ff'),fill:true,tension:.35,pointBackgroundColor:AX,pointRadius:4,borderWidth:2}]},
+  options:{plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>'$'+c.parsed.y+'B'}}},scales:{x:{grid:{color:GRID}},y:{grid:{color:GRID},ticks:{callback:v=>'$'+v+'B'}}},maintainAspectRatio:false}
+});
+
+new Chart(document.getElementById('capChart'),{
+  type:'bar',
+  data:{labels:['Q2 2024','Q2 2025'],datasets:[{data:[2.26,3.96],backgroundColor:['rgba(0,212,255,.35)',AX],borderRadius:6,barThickness:64}]},
+  options:{plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>'$'+c.parsed.y+'B AEC tech'}}},scales:{x:{grid:{display:false}},y:{grid:{color:GRID},ticks:{callback:v=>'$'+v+'B'}}},maintainAspectRatio:false}
+});
+
+new Chart(document.getElementById('marketChart'),{
+  type:'bar',
+  data:{labels:['TAM $16.45T','SAM $164B','AEC SW $9.17B'],datasets:[{data:[16450,164,9.17],backgroundColor:[AX,'rgba(0,212,255,.55)','rgba(0,212,255,.3)'],borderRadius:6,barThickness:46}]},
+  options:{indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>'$'+c.parsed.x+'B'}}},scales:{x:{type:'logarithmic',grid:{color:GRID},ticks:{callback:v=>'$'+v+'B'}},y:{grid:{display:false}}},maintainAspectRatio:false}
+});
+</script>
+</body>
+</html>
