@@ -7,6 +7,7 @@
 <meta name="description" content="AROBOTIX is the neutral coordination and verification layer between the digital plan and the job site. It reads the model, sequences the work across humans and machines, and creates a defensible record of what was actually built." />
 
 <!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="icon.svg">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
@@ -149,6 +150,10 @@ nav.scrolled{background:rgba(10,10,10,.72);backdrop-filter:blur(14px);border-bot
 .hero-inner{position:relative;z-index:2;max-width:var(--maxw);margin:0 auto;width:100%;padding:0 24px}
 .hero-tag{display:flex;align-items:center;gap:14px;margin-bottom:26px}
 .hero-tag .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 14px var(--accent);animation:pulse 2.2s infinite}
+.hero-tags{display:flex;flex-wrap:wrap;align-items:center;gap:6px 0;margin-top:30px;font-family:'IBM Plex Mono',monospace;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.hero-tags .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 14px var(--accent);animation:pulse 2.2s infinite;margin-right:14px;flex:0 0 auto}
+.hero-tags b{font-weight:400;white-space:nowrap}
+.hero-tags b:not(:last-child)::after{content:"·";color:var(--accent);margin:0 11px}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
 .hero h1{font-size:clamp(2.6rem,8vw,6rem);max-width:16ch}
 .hero h1 .grad{
@@ -352,17 +357,17 @@ ul.tick li::before{content:"▪";color:var(--accent);font-size:.7rem;margin-top:
   <div class="scan"></div>
 
   <div class="hero-inner">
-    <div class="hero-tag reveal in">
-      <span class="dot"></span>
-      <span class="eyebrow">BIM · DfMA · Robotics · AI-Assist · Construction Governance</span>
-    </div>
     <h1 class="reveal in d1">The job site is going<br>automated.<br><span class="grad">Someone has to coordinate it.</span></h1>
     <p class="hero-sub reveal in d2">
       Robots and autonomous machines are arriving on construction sites. AROBOTIX is the
       <b>neutral coordination and verification layer</b> that sits between the digital plan and the field,
       so people can orchestrate humans and machines, confirm what is ready, and keep a defensible record of what actually got built.
     </p>
-    <div class="hero-actions reveal in d3">
+    <div class="hero-tags reveal in d3">
+      <span class="dot"></span>
+      <b>BIM</b><b>DfMA</b><b>Robotics</b><b>AI-Assist</b><b>Construction Governance</b>
+    </div>
+    <div class="hero-actions reveal in d4">
       <a class="btn btn-primary" href="#solution">See how it works <span>→</span></a>
       <a class="btn btn-ghost" href="#audience">For contractors &amp; investors</a>
     </div>
