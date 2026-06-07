@@ -34,7 +34,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
 :root{
   --bg:#0a0a0a;
@@ -324,6 +323,23 @@ footer .legal a{margin:0 4px}
 ul.tick{list-style:none;margin-top:18px;display:flex;flex-direction:column;gap:12px}
 ul.tick li{display:flex;gap:12px;color:var(--muted);font-size:.95rem}
 ul.tick li::before{content:"▪";color:var(--accent);font-size:.7rem;margin-top:7px}
+/* pricing plans */
+.plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin-top:40px}
+.plan{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:28px;transition:transform .35s,border-color .35s,background .35s;position:relative}
+.plan:hover{transform:translateY(-6px);border-color:var(--line-2);background:var(--surface-2)}
+.plan.feat{border-color:var(--accent);box-shadow:0 0 40px rgba(0,212,255,.1)}
+.plan .tier{font-family:'IBM Plex Mono',monospace;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+.plan h3{font-size:1.3rem;margin:8px 0 4px}
+.plan .who{color:var(--muted);font-size:.88rem;margin-bottom:16px;min-height:40px}
+.plan .price{font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:1.1rem;color:var(--text);margin-bottom:18px;padding-bottom:18px;border-bottom:1px solid var(--line)}
+.plan ul{list-style:none;display:flex;flex-direction:column;gap:10px;margin:0 0 24px;flex:1}
+.plan ul li{display:flex;gap:10px;color:var(--muted);font-size:.9rem}
+.plan ul li::before{content:"\2713";color:var(--accent);font-weight:600}
+.plan .badge{position:absolute;top:16px;right:16px;font-family:'IBM Plex Mono',monospace;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:#03161c;background:var(--accent);padding:4px 10px;border-radius:20px}
+.plan .pbtn{display:block;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:.82rem;padding:12px;border-radius:5px;border:1px solid var(--line-2);color:var(--text);transition:all .25s}
+.plan .pbtn:hover{border-color:var(--accent);color:var(--accent)}
+.plan.feat .pbtn{background:var(--accent);color:#03161c;border-color:var(--accent);font-weight:600}
+.plan.feat .pbtn:hover{box-shadow:0 0 24px rgba(0,212,255,.4);color:#03161c}
 </style>
 </head>
 <body>
@@ -335,12 +351,11 @@ ul.tick li::before{content:"▪";color:var(--accent);font-size:.7rem;margin-top:
     <span class="wordmark">AROBOTIX</span>
   </a>
   <div class="navlinks">
-    <a href="#why">Why Now</a>
-    <a href="#solution">What It Does</a>
+    <a href="#solution">What We Do</a>
     <a href="#tech">Technology</a>
-    <a href="#market">Market</a>
-    <a href="#audience">For You</a>
-    <a href="#team">Team</a>
+    <a href="#benefits">Benefits</a>
+    <a href="#partners">Partners</a>
+    <a href="#pricing">Pricing</a>
   </div>
   <a class="nav-cta" href="#contact">Get in touch</a>
 </nav>
@@ -369,7 +384,7 @@ ul.tick li::before{content:"▪";color:var(--accent);font-size:.7rem;margin-top:
     </div>
     <div class="hero-actions reveal in d4">
       <a class="btn btn-primary" href="#solution">See how it works <span>→</span></a>
-      <a class="btn btn-ghost" href="#audience">For contractors &amp; investors</a>
+      <a class="btn btn-ghost" href="#tech">Explore the technology</a>
     </div>
   </div>
 
@@ -452,20 +467,6 @@ ul.tick li::before{content:"▪";color:var(--accent);font-size:.7rem;margin-top:
         <p>The industry is expanding in volume, speed, and scale. More complexity demands faster completion, higher quality, and better safety, which manual coordination cannot keep up with.</p>
       </div>
     </div>
-
-    <div class="charts" style="margin-top:24px">
-      <div class="chartcard reveal">
-        <h4>Construction robotics market</h4>
-        <div class="cap">Projected growth, USD billions · 17.1% CAGR</div>
-        <div class="chartwrap"><canvas id="roboChart"></canvas></div>
-      </div>
-      <div class="chartcard reveal d1">
-        <h4>Capital is accelerating</h4>
-        <div class="cap">AEC tech investment, Q2 by year, USD billions</div>
-        <div class="chartwrap"><canvas id="capChart"></canvas></div>
-      </div>
-    </div>
-    <p class="note reveal">Figures reproduced from AROBOTIX market research in the information deck. Verify current sources before external publication.</p>
   </div>
 </section>
 
@@ -703,47 +704,22 @@ ul.tick li::before{content:"▪";color:var(--accent);font-size:.7rem;margin-top:
 
 <div class="divider"></div>
 
-<!-- MARKET -->
-<section class="section" id="market">
+<!-- BENEFITS -->
+<section class="section" id="benefits" style="background:linear-gradient(180deg,var(--bg),#070a0c 50%,var(--bg))">
   <div class="wrap">
-    <div class="eyebrow reveal">Market Opportunity</div>
-    <h2 class="reveal d1" style="margin-top:14px;max-width:24ch">The largest industry on earth. The least digitized. And no one has built the coordination layer. <span class="accent">Yet.</span></h2>
+    <div class="eyebrow reveal">Benefits &amp; Outcomes</div>
+    <h2 class="reveal d1" style="margin-top:14px">What changes on your site.</h2>
+    <p class="lead reveal d2" style="margin-top:18px">AROBOTIX does not build anything. It makes sure what gets built is coordinated, confirmed, and defensible. Here is what that looks like in practice.</p>
 
-    <div class="mstats" style="margin-top:46px">
-      <div class="mstat reveal"><div class="v">$16.45T</div><div class="l">Global Construction Market</div><div class="s">Total Addressable Market</div></div>
-      <div class="mstat reveal d1"><div class="v">$164B+</div><div class="l">Construction Tech Market</div><div class="s">Serviceable Addressable Market</div></div>
-      <div class="mstat reveal d2"><div class="v">$9.17B</div><div class="l">AEC Software Market</div><div class="s">Immediate opportunity · 9.7% CAGR</div></div>
-      <div class="mstat reveal d3"><div class="v">$3.66B</div><div class="l">Construction Robotics</div><div class="s">By 2030 · 17.1% CAGR · the layer we coordinate</div></div>
+    <div class="grid g3" style="margin-top:40px">
+      <div class="card reveal"><h3>Fewer lost mornings</h3><p>Readiness across crews, machines, and materials is confirmed before the day starts, so work begins on time instead of after an hour of phone calls.</p></div>
+      <div class="card reveal d1"><h3>Disputes become lookups</h3><p>Every task leaves a confidence-tagged, time-stamped record. When a question comes up months later, the answer surfaces in seconds instead of in a claim.</p></div>
+      <div class="card reveal d2"><h3>Every build makes the next smarter</h3><p>Insights from each project feed the next, improving coordination accuracy and surfacing risk earlier over time.</p></div>
     </div>
 
-    <div class="charts">
-      <div class="chartcard reveal">
-        <h4>Market sizing</h4>
-        <div class="cap">Log scale, USD · TAM → SAM → immediate opportunity</div>
-        <div class="chartwrap"><canvas id="marketChart"></canvas></div>
-      </div>
-      <div class="chartcard reveal d1">
-        <h4>The insight</h4>
-        <div class="cap" style="margin-bottom:18px">Why the gap is the opportunity</div>
-        <p style="color:var(--muted);font-size:.95rem">Every other complex industry, logistics, manufacturing, healthcare, has an operating system that reads intent, breaks it into tasks, routes work to humans and machines, closes the loop, and learns.</p>
-        <p style="color:var(--text);font-size:.95rem;margin-top:14px;font-weight:500">Construction still runs on PDFs, phone calls, and tribal knowledge. The construction industry has a potential <span class="accent">$2T coordination layer</span> that does not exist yet.</p>
-      </div>
-    </div>
-    <p class="note reveal">Market figures reproduced from the AROBOTIX information deck. Sources should be re-verified before public release.</p>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- AUDIENCE -->
-<section class="section" id="audience" style="background:linear-gradient(180deg,var(--bg),#070a0c 50%,var(--bg))">
-  <div class="wrap">
-    <div class="eyebrow reveal">For Contractors</div>
-    <h2 class="reveal d1" style="margin-top:14px;margin-bottom:30px">Built for the people who run the work.</h2>
-
-    <div class="sol" style="grid-template-columns:1fr 1fr">
+    <div class="sol" style="grid-template-columns:1fr 1fr;margin-top:24px">
       <div class="reveal d2">
-        <h3 style="margin-bottom:14px">A Monday morning, with AROBOTIX</h3>
+        <h3 style="margin-bottom:14px">A day with AROBOTIX</h3>
         <ul class="tick">
           <li><b style="color:var(--text)">6:55 AM.</b> The foreman opens AROBOTIX. Readiness across crews, machines, and systems is confirmed. The day's sequence is set before the briefing starts.</li>
           <li><b style="color:var(--text)">10:00 AM.</b> A pour completes. The time, machines, conditions, and supervisor confirmation are recorded instantly. Proof-of-Work, tagged and defensible.</li>
@@ -757,7 +733,7 @@ ul.tick li::before{content:"▪";color:var(--accent);font-size:.7rem;margin-top:
           <li>A defensible record that reduces dispute and rework exposure</li>
           <li>No hardware lock-in: it works with the robots and tools you already use</li>
           <li>Your team keeps authority. The platform supports decisions, it does not make them</li>
-          <li>Lowest entry barrier: per-site fees on a free, structured pilot</li>
+          <li>A coordination advantage that grows as your sites adopt more automation</li>
         </ul>
       </div>
     </div>
@@ -766,70 +742,29 @@ ul.tick li::before{content:"▪";color:var(--accent);font-size:.7rem;margin-top:
 
 <div class="divider"></div>
 
-<!-- ROADMAP -->
-<section class="section" id="roadmap">
+<!-- PARTNERS -->
+<section class="section" id="partners">
   <div class="wrap">
-    <div class="eyebrow reveal">Go-To-Market</div>
-    <h2 class="reveal d1" style="margin-top:14px">Long sales cycles demand early credibility. <span class="accent">Pilot before scale.</span></h2>
-    <div class="grid g3" style="margin-top:46px">
-      <div class="card reveal">
-        <div class="ph" style="font-family:'IBM Plex Mono';color:var(--accent);font-size:.74rem;letter-spacing:.18em;margin-bottom:10px">CRAWL · NOW – 8 MO</div>
-        <h3>Foundation</h3>
-        <ul class="tick">
-          <li>Complete the BIM-to-Task Compiler</li>
-          <li>File key patents</li>
-          <li>Secure two pilot GC partners</li>
-          <li>Run the Proof of Concept on a live Hoa Binh site</li>
-        </ul>
-      </div>
-      <div class="card reveal d1">
-        <div class="ph" style="font-family:'IBM Plex Mono';color:var(--accent);font-size:.74rem;letter-spacing:.18em;margin-bottom:10px">WALK · 8 – 12 MO</div>
-        <h3>Pilot</h3>
-        <ul class="tick">
-          <li>Launch the Proof-of-Work system</li>
-          <li>Onboard first paying enterprise clients</li>
-          <li>Build the government and infrastructure pipeline</li>
-        </ul>
-      </div>
-      <div class="card reveal d2">
-        <div class="ph" style="font-family:'IBM Plex Mono';color:var(--accent);font-size:.74rem;letter-spacing:.18em;margin-bottom:10px">RUN · 12 – 24 MO</div>
-        <h3>Scale</h3>
-        <ul class="tick">
-          <li>Full platform deployment</li>
-          <li>OEM integrations live</li>
-          <li>Expand to SEA, US, and Middle East</li>
-        </ul>
-      </div>
+    <div class="eyebrow reveal">Partnerships</div>
+    <h2 class="reveal d1" style="margin-top:14px">Build the future of construction with us.</h2>
+    <p class="lead reveal d2" style="margin-top:18px">AROBOTIX is neutral infrastructure. It gets more valuable as more of the ecosystem connects to it. We partner across the construction value chain, and every partner makes the coordination layer stronger.</p>
+
+    <div class="grid g3" style="margin-top:40px">
+      <div class="card reveal"><h3>General contractors &amp; builders</h3><p>Run a structured pilot, shape the roadmap around how you actually build, and gain a coordination and verification advantage as your sites adopt automation.</p></div>
+      <div class="card reveal d1"><h3>Robot &amp; equipment vendors</h3><p>Connect your hardware through robot-agnostic APIs and reach customers through the orchestration layer. No lock-in and no taking sides. Your machines become part of a coordinated site.</p></div>
+      <div class="card reveal d2"><h3>Technology &amp; software partners</h3><p>BIM, scheduling, and field platforms integrate so data flows end to end. AROBOTIX sits above the tool stack and connects it rather than replacing it.</p></div>
+      <div class="card reveal"><h3>Owners &amp; developers</h3><p>Get transparent, verified execution records on your assets, lower dispute and rework exposure, and clearer visibility from plan to finished building.</p></div>
+      <div class="card reveal d1"><h3>Government &amp; infrastructure</h3><p>Bring defensible verification to critical public projects where accountability and a trustworthy record matter most.</p></div>
+      <div class="card reveal d2"><h3>Academic &amp; standards partners</h3><p>Collaborate on research, validation, and standards alignment with groups like the BIMForum DfMA Working Group and university research teams.</p></div>
     </div>
-  </div>
-</section>
 
-<div class="divider"></div>
-
-<!-- RISKS -->
-<section class="section" id="risks">
-  <div class="wrap">
-    <div class="eyebrow reveal">Risks &amp; Mitigation</div>
-    <h2 class="reveal d1" style="margin-top:14px">We know the risks. We built the architecture around them.</h2>
-
-    <table class="ctable risks reveal d1" style="margin-top:40px">
-      <thead><tr><th>Risk</th><th class="ax">How we've built around it</th></tr></thead>
-      <tbody>
-        <tr><td>Long sales cycles</td><td>Start with per-site fees and pilots to shorten time-to-value, then land-and-expand into enterprise services.</td></tr>
-        <tr><td>Site variability</td><td>Begin with coordination and verification primitives, learn across projects, and apply configurable playbooks by trade and scope.</td></tr>
-        <tr><td>Hardware fragmentation</td><td>Robot-agnostic APIs and partner integrations. No hardware lock-in.</td></tr>
-        <tr><td>Contractor acceptance</td><td>Pilot-driven adoption, transparent ROI from day one, and full preservation of contractor workflow autonomy.</td></tr>
-        <tr><td>The Katerra lesson</td><td>Neutral, human-led orchestration that preserves contractor control and liability posture. We coordinate and verify, we do not vertically integrate construction.</td></tr>
-      </tbody>
-    </table>
-
-    <div class="gapbox reveal d1" style="margin-top:24px">
+    <div class="gapbox reveal d1" style="margin-top:24px;align-items:center">
       <div>
-        <h3 style="margin-bottom:12px">Humans always remain in authority.</h3>
-        <p style="color:var(--muted)">AROBOTIX supports judgment, it does not replace it. Every coordination decision and every verified record is built around the contractor's authority, not against it.</p>
+        <h3 style="margin-bottom:10px">Become a partner</h3>
+        <p style="color:var(--muted)">Whether you build, manufacture, develop, or research, there is a place for you in the AROBOTIX ecosystem. Tell us how you want to work together.</p>
       </div>
-      <div style="display:flex;align-items:center">
-        <div class="big">We coordinate and verify. We never take command of the site.</div>
+      <div style="display:flex;align-items:center;justify-content:flex-end">
+        <a class="btn btn-primary" href="mailto:info@arobotix.com?subject=AROBOTIX%20Partnership">Become a partner <span>&#8594;</span></a>
       </div>
     </div>
   </div>
@@ -837,55 +772,73 @@ ul.tick li::before{content:"▪";color:var(--accent);font-size:.7rem;margin-top:
 
 <div class="divider"></div>
 
-<!-- TEAM -->
-<section class="section" id="team">
+<!-- PRICING -->
+<section class="section" id="pricing" style="background:linear-gradient(180deg,var(--bg),#070a0c 50%,var(--bg))">
   <div class="wrap">
-    <div class="eyebrow reveal">The Team</div>
-    <h2 class="reveal d1" style="margin-top:14px">The right people, built for exactly this problem.</h2>
+    <div class="eyebrow reveal">Plans</div>
+    <h2 class="reveal d1" style="margin-top:14px">Pricing built around how you work.</h2>
+    <p class="lead reveal d2" style="margin-top:18px">From a single-site pilot to enterprise deployment, plans scale with your projects. Pricing is tailored to scope and scale, so we set it together. Contact us for a quote.</p>
 
-    <div class="team-grid" style="margin-top:46px">
-      <div class="card member reveal">
-        <h3>Han Hoang</h3>
-        <div class="role">Founder &amp; CEO</div>
-        <p>MIT, 25+ years in BIM, DfMA, VDC, and automated construction workflows. BIMForum DfMA Working Group (USA) and BIM Steering Committee (Vietnam).</p>
+    <div class="plans">
+      <div class="plan reveal">
+        <div class="tier">Start here</div>
+        <h3>Pilot</h3>
+        <div class="who">For teams proving the value on a first project.</div>
+        <div class="price">Contact us</div>
+        <ul>
+          <li>Single site, structured pilot</li>
+          <li>BIM-to-Task coordination</li>
+          <li>Proof-of-Work records</li>
+          <li>Onboarding &amp; support</li>
+        </ul>
+        <a class="pbtn" href="mailto:info@arobotix.com?subject=AROBOTIX%20Pilot%20Plan">Contact us</a>
       </div>
-      <div class="card member reveal d1">
-        <h3>Sahil Harriram</h3>
-        <div class="role">CTO &amp; Co-founder</div>
-        <p>Builds the core platform: field data ingestion, confidence tagging, and the record integrity layer.</p>
+      <div class="plan feat reveal d1">
+        <div class="badge">Most flexible</div>
+        <div class="tier">Pay as you build</div>
+        <h3>Per-Site</h3>
+        <div class="who">For project-by-project use across your portfolio.</div>
+        <div class="price">Contact us</div>
+        <ul>
+          <li>Everything in Pilot</li>
+          <li>Per-project pricing</li>
+          <li>Full coordination &amp; sequencing</li>
+          <li>Verified execution records</li>
+        </ul>
+        <a class="pbtn" href="mailto:info@arobotix.com?subject=AROBOTIX%20Per-Site%20Plan">Contact us</a>
       </div>
-      <div class="card member reveal d2">
-        <h3>Maryline Vo</h3>
-        <div class="role">Chief Operating Officer</div>
-        <p>Manages team deployment and operational scaling across Vietnam and SEA.</p>
+      <div class="plan reveal d2">
+        <div class="tier">At scale</div>
+        <h3>Enterprise</h3>
+        <div class="who">For general contractors and owners deploying across many sites.</div>
+        <div class="price">Contact us</div>
+        <ul>
+          <li>Multi-site deployment</li>
+          <li>Annual or multi-year licensing</li>
+          <li>Priority support &amp; SLAs</li>
+          <li>Portfolio analytics &amp; integrations</li>
+        </ul>
+        <a class="pbtn" href="mailto:info@arobotix.com?subject=AROBOTIX%20Enterprise%20Plan">Contact us</a>
+      </div>
+      <div class="plan reveal d3">
+        <div class="tier">Integrate</div>
+        <h3>Partner / OEM</h3>
+        <div class="who">For robot, equipment, and software vendors.</div>
+        <div class="price">Contact us</div>
+        <ul>
+          <li>Robot-agnostic API access</li>
+          <li>Integration support</li>
+          <li>Revenue-share models</li>
+          <li>Joint go-to-market</li>
+        </ul>
+        <a class="pbtn" href="mailto:info@arobotix.com?subject=AROBOTIX%20Partner%20Plan">Contact us</a>
       </div>
     </div>
-
-    <div class="eyebrow reveal" style="margin-top:46px">Advisors</div>
-    <div class="adv-grid" style="grid-template-columns:repeat(auto-fit,minmax(230px,1fr));margin-top:20px">
-      <div class="card member reveal">
-        <h3>Jim Bedrick, FAIA</h3>
-        <div class="role">Industry Advisor</div>
-        <p>Co-author of the BIMForum LOD Specification. Deep expertise in digital construction standards.</p>
-      </div>
-      <div class="card member reveal d1">
-        <h3>Kristijan Vilibić</h3>
-        <div class="role">Technology Advisor</div>
-        <p>AEC researcher, University of Zagreb. AI, computational design, and digital construction.</p>
-      </div>
-      <div class="card member reveal d2">
-        <h3>Louis Nguyen</h3>
-        <div class="role">Finance &amp; Investment Advisor</div>
-        <p>Financial strategy, capital structure, and investment guidance.</p>
-      </div>
-      <div class="card member reveal d3">
-        <h3>Binh Tran</h3>
-        <div class="role">Strategy Advisor</div>
-        <p>Venture and market strategy across Vietnam and Southeast Asia.</p>
-      </div>
-    </div>
+    <p class="note reveal">We do not publish fixed prices, because every project differs in scope, scale, and integration needs. Contact us and we will put together a plan that fits.</p>
   </div>
 </section>
+
+<div class="divider"></div>
 
 <!-- CTA -->
 <section class="section cta" id="contact">
@@ -893,8 +846,8 @@ ul.tick li::before{content:"▪";color:var(--accent);font-size:.7rem;margin-top:
     <div class="eyebrow reveal" style="text-align:center">The Future</div>
     <h2 class="reveal d1" style="margin-top:18px">The next big construction platform won't build.<br><span class="grad">It will orchestrate.</span></h2>
     <div class="hero-actions reveal d2" style="justify-content:center;margin-top:38px">
-      <a class="btn btn-primary" href="mailto:info@arobotix.com">Talk to us <span>→</span></a>
-      <a class="btn btn-ghost" href="https://www.arobotix.com" target="_blank" rel="noopener">www.arobotix.com</a>
+      <a class="btn btn-primary" href="mailto:info@arobotix.com?subject=AROBOTIX%20Enquiry">Contact us <span>→</span></a>
+      <a class="btn btn-ghost" href="#partners">Become a partner</a>
     </div>
   </div>
 </section>
@@ -923,32 +876,6 @@ tabs.forEach(t=>t.addEventListener('click',()=>{
   tabs.forEach(x=>x.classList.remove('active'));panels.forEach(p=>p.classList.remove('active'));
   t.classList.add('active');document.querySelector('.tech-panel[data-panel="'+t.dataset.tab+'"]').classList.add('active');
 }));
-
-/* charts */
-const AX='#00d4ff', GRID='rgba(255,255,255,.06)', MUT='#8a959d';
-Chart.defaults.font.family="'IBM Plex Mono', monospace";
-Chart.defaults.color=MUT;
-Chart.defaults.font.size=11;
-
-function grad(ctx,c){const g=ctx.createLinearGradient(0,0,0,240);g.addColorStop(0,c+'66');g.addColorStop(1,c+'00');return g;}
-
-new Chart(document.getElementById('roboChart'),{
-  type:'line',
-  data:{labels:['2024','2026','2028','2030'],datasets:[{data:[1.4,2.0,2.8,3.66],borderColor:AX,backgroundColor:(c)=>grad(c.chart.ctx,'#00d4ff'),fill:true,tension:.35,pointBackgroundColor:AX,pointRadius:4,borderWidth:2}]},
-  options:{plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>'$'+c.parsed.y+'B'}}},scales:{x:{grid:{color:GRID}},y:{grid:{color:GRID},ticks:{callback:v=>'$'+v+'B'}}},maintainAspectRatio:false}
-});
-
-new Chart(document.getElementById('capChart'),{
-  type:'bar',
-  data:{labels:['Q2 2024','Q2 2025'],datasets:[{data:[2.26,3.96],backgroundColor:['rgba(0,212,255,.35)',AX],borderRadius:6,barThickness:64}]},
-  options:{plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>'$'+c.parsed.y+'B AEC tech'}}},scales:{x:{grid:{display:false}},y:{grid:{color:GRID},ticks:{callback:v=>'$'+v+'B'}}},maintainAspectRatio:false}
-});
-
-new Chart(document.getElementById('marketChart'),{
-  type:'bar',
-  data:{labels:['TAM $16.45T','SAM $164B','AEC SW $9.17B'],datasets:[{data:[16450,164,9.17],backgroundColor:[AX,'rgba(0,212,255,.55)','rgba(0,212,255,.3)'],borderRadius:6,barThickness:46}]},
-  options:{indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>'$'+c.parsed.x+'B'}}},scales:{x:{type:'logarithmic',grid:{color:GRID},ticks:{callback:v=>'$'+v+'B'}},y:{grid:{display:false}}},maintainAspectRatio:false}
-});
 </script>
 </body>
 </html>
