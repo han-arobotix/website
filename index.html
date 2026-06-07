@@ -110,6 +110,16 @@ nav.scrolled{background:rgba(10,10,10,.72);backdrop-filter:blur(14px);border-bot
 }
 .nav-cta:hover{background:var(--accent);color:#03161c;box-shadow:0 0 24px rgba(0,212,255,.4)}
 @media(max-width:860px){.navlinks{display:none}}
+@media(max-width:600px){
+  nav{padding:12px 16px;gap:10px}
+  .brand{font-size:1rem;gap:8px;min-width:0;flex:0 1 auto;overflow:hidden}
+  .brand img{height:24px}
+  .brand .wordmark{white-space:nowrap}
+  .nav-cta{padding:8px 13px;font-size:.7rem;flex:0 0 auto;white-space:nowrap}
+}
+@media(max-width:380px){
+  .brand .wordmark{display:none}
+}
 
 /* ---------- hero ---------- */
 .hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden}
@@ -252,6 +262,8 @@ nav.scrolled{background:rgba(10,10,10,.72);backdrop-filter:blur(14px);border-bot
 .ctable .old{color:var(--muted)}
 .ctable .new{color:var(--text)}
 .ctable .new::before{content:"→ ";color:var(--accent)}
+.ctable.risks td:first-child{color:var(--accent);font-weight:500;width:34%}
+.ctable.risks td{color:var(--muted)}
 
 /* ---------- market / charts ---------- */
 .mstats{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:18px;margin-bottom:46px}
@@ -299,6 +311,9 @@ nav.scrolled{background:rgba(10,10,10,.72);backdrop-filter:blur(14px);border-bot
 /* ---------- footer ---------- */
 footer{border-top:1px solid var(--line);padding:34px 24px;background:var(--bg)}
 footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;font-family:'IBM Plex Mono',monospace;font-size:.74rem;color:var(--muted-2);letter-spacing:.04em}
+footer a{color:var(--muted)}
+footer a:hover{color:var(--accent)}
+footer .legal a{margin:0 4px}
 
 .note{font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--muted-2);letter-spacing:.06em;margin-top:14px}
 ul.tick{list-style:none;margin-top:18px;display:flex;flex-direction:column;gap:12px}
@@ -312,7 +327,7 @@ ul.tick li::before{content:"▪";color:var(--accent);font-size:.7rem;margin-top:
 <nav id="nav">
   <a class="brand" href="#top">
     <img src="arobotix-logo-white.png" alt="AROBOTIX logo">
-    AROBOTIX
+    <span class="wordmark">AROBOTIX</span>
   </a>
   <div class="navlinks">
     <a href="#why">Why Now</a>
@@ -786,6 +801,37 @@ ul.tick li::before{content:"▪";color:var(--accent);font-size:.7rem;margin-top:
 
 <div class="divider"></div>
 
+<!-- RISKS -->
+<section class="section" id="risks">
+  <div class="wrap">
+    <div class="eyebrow reveal">Risks &amp; Mitigation</div>
+    <h2 class="reveal d1" style="margin-top:14px">We know the risks. We built the architecture around them.</h2>
+
+    <table class="ctable risks reveal d1" style="margin-top:40px">
+      <thead><tr><th>Risk</th><th class="ax">How we've built around it</th></tr></thead>
+      <tbody>
+        <tr><td>Long sales cycles</td><td>Start with per-site fees and pilots to shorten time-to-value, then land-and-expand into enterprise services.</td></tr>
+        <tr><td>Site variability</td><td>Begin with coordination and verification primitives, learn across projects, and apply configurable playbooks by trade and scope.</td></tr>
+        <tr><td>Hardware fragmentation</td><td>Robot-agnostic APIs and partner integrations. No hardware lock-in.</td></tr>
+        <tr><td>Contractor acceptance</td><td>Pilot-driven adoption, transparent ROI from day one, and full preservation of contractor workflow autonomy.</td></tr>
+        <tr><td>The Katerra lesson</td><td>Neutral, human-led orchestration that preserves contractor control and liability posture. We coordinate and verify, we do not vertically integrate construction.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="gapbox reveal d1" style="margin-top:24px">
+      <div>
+        <h3 style="margin-bottom:12px">Humans always remain in authority.</h3>
+        <p style="color:var(--muted)">AROBOTIX supports judgment, it does not replace it. Every coordination decision and every verified record is built around the contractor's authority, not against it.</p>
+      </div>
+      <div style="display:flex;align-items:center">
+        <div class="big">We coordinate and verify. We never take command of the site.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
 <!-- TEAM -->
 <section class="section" id="team">
   <div class="wrap">
@@ -852,6 +898,7 @@ ul.tick li::before{content:"▪";color:var(--accent);font-size:.7rem;margin-top:
   <div class="wrap">
     <span style="display:flex;align-items:center;gap:12px"><img src="arobotix-logo-white.png" alt="AROBOTIX" style="height:30px;width:auto;opacity:.85">AROBOTIX CORP. · DELAWARE C-CORP · HO CHI MINH CITY</span>
     <span>BIM · DfMA · ROBOTICS · AUTOMATION · AI-ASSIST · GOVERNANCE</span>
+    <span class="legal"><a href="terms.html">Terms of Use</a> · <a href="privacy.html">Privacy Policy</a></span>
     <span>© 2026 · CONFIDENTIAL</span>
   </div>
 </footer>
