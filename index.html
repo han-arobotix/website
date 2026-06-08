@@ -353,6 +353,27 @@ ul.tick li::before{content:"▪";color:var(--accent);font-size:.7rem;margin-top:
 .plan .pbtn:hover{border-color:var(--accent);color:var(--accent)}
 .plan.feat .pbtn{background:var(--accent);color:#03161c;border-color:var(--accent);font-weight:600}
 .plan.feat .pbtn:hover{box-shadow:0 0 24px rgba(0,212,255,.4);color:#03161c}
+/* hardware roadmap */
+.hw-head{margin-top:62px;padding-top:50px;border-top:1px solid var(--line)}
+.hw-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:30px}
+.hw-tab{font-family:'IBM Plex Mono',monospace;font-size:.82rem;letter-spacing:.02em;padding:12px 18px;border:1px solid var(--line);border-radius:4px;color:var(--muted);cursor:pointer;transition:all .25s;background:transparent}
+.hw-tab:hover{color:var(--text);border-color:var(--line-2)}
+.hw-tab.active{color:#03161c;background:var(--accent);border-color:var(--accent);font-weight:600}
+.hw-panel{display:none;animation:fade .5s;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+.hw-panel.active{display:grid}
+@media(max-width:900px){.hw-panel{grid-template-columns:1fr;gap:26px}}
+.hw-panel .ph{font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.2em;color:var(--accent);text-transform:uppercase;margin-bottom:14px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.hw-panel .ph .pill{border:1px solid rgba(0,212,255,.4);border-radius:20px;padding:3px 12px;font-size:.66rem}
+.hw-panel h3{font-size:clamp(1.3rem,2.4vw,1.8rem);margin-bottom:14px}
+.hw-panel p{color:var(--muted);margin-bottom:14px}
+.hw-img{width:100%;border:1px solid var(--line);border-radius:10px;cursor:zoom-in;transition:border-color .3s,transform .3s;display:block}
+.hw-img:hover{border-color:var(--accent);transform:scale(1.01)}
+.hw-cap{font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--muted);margin-top:10px;text-align:center}
+.lightbox{position:fixed;inset:0;z-index:300;display:none;align-items:center;justify-content:center;background:rgba(5,7,9,.93);backdrop-filter:blur(6px);padding:24px;cursor:zoom-out}
+.lightbox.open{display:flex}
+.lightbox img{max-width:96%;max-height:92%;border-radius:10px;border:1px solid var(--line-2);box-shadow:0 0 60px rgba(0,0,0,.6)}
+.lightbox .lb-close{position:absolute;top:20px;right:26px;font-size:2.2rem;color:var(--muted);cursor:pointer;line-height:1}
+.lightbox .lb-close:hover{color:var(--accent)}
 </style>
 </head>
 <body>
@@ -676,6 +697,105 @@ ul.tick li::before{content:"▪";color:var(--accent);font-size:.7rem;margin-top:
         <div class="li"><span class="key">classify</span><span class="val">Uniclass · OmniClass</span></div>
       </div>
     </div>
+
+    <!-- HARDWARE ROADMAP -->
+    <div class="hw-head reveal">
+      <div class="eyebrow">Hardware on the Roadmap</div>
+      <h3 style="font-size:clamp(1.4rem,2.6vw,2rem);margin:12px 0 10px">Software first. Hardware where it compounds.</h3>
+      <p class="lead">Planned field devices that extend the platform from the screen to the slab. Each one feeds the same execution data graph, and none is required for the software to work. We lean toward integrating proven hardware rather than building from scratch. These are exploratory roadmap items, not shipping products.</p>
+    </div>
+
+    <div class="hw-explorer reveal d1" style="margin-top:30px">
+      <div class="hw-tabs">
+        <button class="hw-tab active" data-hw="0">01 / AR Readiness Headset</button>
+        <button class="hw-tab" data-hw="1">02 / Proof-of-Work Cam</button>
+        <button class="hw-tab" data-hw="2">03 / Readiness Sensors</button>
+        <button class="hw-tab" data-hw="3">04 / Task Tagging</button>
+        <button class="hw-tab" data-hw="4">05 / Edge Gateway</button>
+      </div>
+
+      <div class="hw-panel active" data-hwpanel="0">
+        <div>
+          <div class="ph">Field UI <span class="pill">Viability: High</span></div>
+          <h3>AR Readiness &amp; Model-Viewing Headset</h3>
+          <p>A heads-up display that overlays the compiler's task sequence, readiness status, and model geometry onto the physical work area. Most likely an integration play on existing AR hardware rather than a ground-up build, which keeps it doable.</p>
+          <p>It is the field-facing window into the software: the place where the plan meets the slab.</p>
+          <ul class="tick"><li>Overlays task sequence and readiness on-site</li><li>Integration-first, not a ground-up build</li><li>The crew's view into the compiler</li></ul>
+        </div>
+        <div>
+          <img src="arobotix-holo-helmet.jpg" alt="AROBOTIX Holographic Projector Helmet concept" class="hw-img" data-full="arobotix-holo-helmet.jpg">
+          <div class="hw-cap">Concept render · tap to enlarge</div>
+        </div>
+      </div>
+
+      <div class="hw-panel" data-hwpanel="1">
+        <div>
+          <div class="ph">Produces the hero output <span class="pill">Viability: High</span></div>
+          <h3>Helmet-Mounted Proof-of-Work Capture Cam</h3>
+          <p>A small camera that auto-logs geotagged, timestamped capture against the active task and writes directly to the Proof-of-Work record. It turns "work happened" into a confidence-tagged record without anyone stopping to document.</p>
+          <p>Strategically the strongest of the five, because it directly produces our hero output.</p>
+        </div>
+        <div class="tech-spec">
+          <div class="hd">Device profile</div>
+          <div class="li"><span class="key">role</span><span class="val">Auto-capture for PoW</span></div>
+          <div class="li"><span class="key">output</span><span class="val">Geotagged, timestamped</span></div>
+          <div class="li"><span class="key">build</span><span class="val">Moderate engineering</span></div>
+          <div class="li"><span class="key">viability</span><span class="val" style="color:var(--accent)">High</span></div>
+          <div class="li"><span class="key">status</span><span class="val">Roadmap</span></div>
+        </div>
+      </div>
+
+      <div class="hw-panel" data-hwpanel="2">
+        <div>
+          <div class="ph">Verified readiness <span class="pill">Viability: Medium</span></div>
+          <h3>Readiness Sensor Beacons</h3>
+          <p>Low-cost sensors for the physical prerequisites the CTOM already tracks: concrete maturity, moisture, temperature, and cure state. They turn readiness validation from a human checkbox into a verified signal.</p>
+          <p>A tight fit with the FOUNDATIONS and STRUCTURE field groups. Harder to build, but defensible because the data is ours.</p>
+        </div>
+        <div class="tech-spec">
+          <div class="hd">Device profile</div>
+          <div class="li"><span class="key">measures</span><span class="val">Maturity, moisture, temp, cure</span></div>
+          <div class="li"><span class="key">fit</span><span class="val">FOUNDATIONS · STRUCTURE</span></div>
+          <div class="li"><span class="key">build</span><span class="val">Harder</span></div>
+          <div class="li"><span class="key">viability</span><span class="val" style="color:var(--accent)">Medium</span></div>
+          <div class="li"><span class="key">status</span><span class="val">Roadmap</span></div>
+        </div>
+      </div>
+
+      <div class="hw-panel" data-hwpanel="3">
+        <div>
+          <div class="ph">Clean data input <span class="pill">Viability: High</span></div>
+          <h3>RFID / QR / NFC Task Tagging</h3>
+          <p>Physical tags placed on assemblies or zones, paired with a scanner, so a worker checks a task in and out by scanning. Cheap, proven technology, easy to build, and it anchors the Proof-of-Work timeline to real locations and people.</p>
+          <p>Low differentiation on its own, but a clean, reliable data input into the record.</p>
+        </div>
+        <div class="tech-spec">
+          <div class="hd">Device profile</div>
+          <div class="li"><span class="key">tech</span><span class="val">RFID · QR · NFC</span></div>
+          <div class="li"><span class="key">role</span><span class="val">Check-in / check-out</span></div>
+          <div class="li"><span class="key">build</span><span class="val">Low effort, proven</span></div>
+          <div class="li"><span class="key">viability</span><span class="val" style="color:var(--accent)">High</span></div>
+          <div class="li"><span class="key">status</span><span class="val">Roadmap</span></div>
+        </div>
+      </div>
+
+      <div class="hw-panel" data-hwpanel="4">
+        <div>
+          <div class="ph">Future-proofing <span class="pill">Viability: Medium</span></div>
+          <h3>On-Site Edge Gateway</h3>
+          <p>A ruggedized box that aggregates jobsite sensor, camera, and machine data locally, then syncs to the cloud. As sites get more automated and bandwidth gets tight, whoever owns the edge aggregation point owns the data flow.</p>
+          <p>The least flashy of the five, and arguably the most strategic for the orchestration vision.</p>
+        </div>
+        <div class="tech-spec">
+          <div class="hd">Device profile</div>
+          <div class="li"><span class="key">role</span><span class="val">Local data aggregation</span></div>
+          <div class="li"><span class="key">syncs</span><span class="val">Sensors · cameras · machines</span></div>
+          <div class="li"><span class="key">build</span><span class="val">Moderate</span></div>
+          <div class="li"><span class="key">viability</span><span class="val" style="color:var(--accent)">Medium</span></div>
+          <div class="li"><span class="key">status</span><span class="val">Roadmap</span></div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -886,6 +1006,26 @@ tabs.forEach(t=>t.addEventListener('click',()=>{
   tabs.forEach(x=>x.classList.remove('active'));panels.forEach(p=>p.classList.remove('active'));
   t.classList.add('active');document.querySelector('.tech-panel[data-panel="'+t.dataset.tab+'"]').classList.add('active');
 }));
+
+/* hardware tabs */
+(function(){
+  const ex=document.querySelector('.hw-explorer'); if(!ex) return;
+  const ht=ex.querySelectorAll('.hw-tab'), hp=ex.querySelectorAll('.hw-panel');
+  ht.forEach(t=>t.addEventListener('click',()=>{
+    ht.forEach(x=>x.classList.remove('active')); hp.forEach(p=>p.classList.remove('active'));
+    t.classList.add('active'); ex.querySelector('.hw-panel[data-hwpanel="'+t.dataset.hw+'"]').classList.add('active');
+  }));
+})();
+
+/* lightbox */
+(function(){
+  const lb=document.getElementById('lightbox'), im=document.getElementById('lbImg'); if(!lb) return;
+  document.querySelectorAll('.hw-img').forEach(el=>el.addEventListener('click',()=>{im.src=el.dataset.full||el.src; lb.classList.add('open');}));
+  const close=()=>lb.classList.remove('open');
+  lb.addEventListener('click',close);
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')close();});
+})();
 </script>
+<div class="lightbox" id="lightbox"><span class="lb-close" id="lbClose">&times;</span><img id="lbImg" src="" alt="AROBOTIX hardware concept"></div>
 </body>
 </html>
