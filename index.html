@@ -1007,6 +1007,25 @@ tabs.forEach(t=>t.addEventListener('click',()=>{
   lb.addEventListener('click',close);
   document.addEventListener('keydown',e=>{if(e.key==='Escape')close();});
 })();
+
+/* background videos: force muted autoplay, play when in view, pause when out */
+(function(){
+  const vids=document.querySelectorAll('video'); if(!vids.length) return;
+  const play=v=>{try{v.muted=true;v.defaultMuted=true;const p=v.play();if(p&&p.catch)p.catch(()=>{});}catch(e){}};
+  vids.forEach(v=>{
+    v.muted=true; v.setAttribute('muted','');
+    v.addEventListener('loadeddata',()=>play(v),{once:true});
+    v.addEventListener('canplay',()=>play(v),{once:true});
+  });
+  if('IntersectionObserver' in window){
+    const io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting) play(e.target); else e.target.pause(); }),{threshold:.15});
+    vids.forEach(v=>io.observe(v));
+  } else { vids.forEach(play); }
+  // last-resort: kick playback on first user interaction
+  const kick=()=>{vids.forEach(play); document.removeEventListener('pointerdown',kick); document.removeEventListener('scroll',kick);};
+  document.addEventListener('pointerdown',kick,{passive:true,once:true});
+  document.addEventListener('scroll',kick,{passive:true,once:true});
+})();
 </script>
 <div class="lightbox" id="lightbox"><span class="lb-close" id="lbClose">&times;</span><img id="lbImg" src="" alt="AROBOTIX hardware concept"></div>
 </body>
