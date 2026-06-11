@@ -1,0 +1,75 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+
+  - name: "settings"
+    label: "Site Settings"
+    files:
+
+      - name: "pricing"
+        label: "Pricing & Configurator"
+        file: "_data/pricing.json"
+        fields:
+          - label: "Economy Tier"
+            name: "economy"
+            widget: "object"
+            fields:
+              - { label: "Price per sqm (USD)", name: "pricePerSqm", widget: "number", default: 300 }
+              - { label: "Net sqm per bed", name: "sqmPerBed", widget: "number", default: 8 }
+              - { label: "Gross factor (e.g. 1.35 = 35% for corridors/structure)", name: "grossFactor", widget: "number", value_type: "float", step: 0.01, default: 1.35 }
+              - { label: "Cost range variance (e.g. 0.12 = ±12%)", name: "variance", widget: "number", value_type: "float", step: 0.01, default: 0.12 }
+
+          - label: "Standard Tier"
+            name: "standard"
+            widget: "object"
+            fields:
+              - { label: "Price per sqm (USD)", name: "pricePerSqm", widget: "number", default: 400 }
+              - { label: "Net sqm per bed", name: "sqmPerBed", widget: "number", default: 12 }
+              - { label: "Gross factor", name: "grossFactor", widget: "number", value_type: "float", step: 0.01, default: 1.35 }
+              - { label: "Cost range variance", name: "variance", widget: "number", value_type: "float", step: 0.01, default: 0.12 }
+
+          - label: "Premium Tier"
+            name: "premium"
+            widget: "object"
+            fields:
+              - { label: "Price per sqm (USD)", name: "pricePerSqm", widget: "number", default: 500 }
+              - { label: "Net sqm per bed", name: "sqmPerBed", widget: "number", default: 18 }
+              - { label: "Gross factor", name: "grossFactor", widget: "number", value_type: "float", step: 0.01, default: 1.35 }
+              - { label: "Cost range variance", name: "variance", widget: "number", value_type: "float", step: 0.01, default: 0.12 }
+
+          - label: "Timeline"
+            name: "timeline"
+            widget: "object"
+            fields:
+              - { label: "Beds produced per week", name: "bedsPerWeek", widget: "number", default: 50 }
+              - { label: "Design phase (weeks)", name: "designWeeks", widget: "number", default: 4 }
+              - { label: "Shipping phase (weeks)", name: "shippingWeeks", widget: "number", default: 3 }
+
+      - name: "contact"
+        label: "Contact Details"
+        file: "_data/contact.json"
+        fields:
+          - { label: "General email", name: "email", widget: "string" }
+          - { label: "US office email", name: "emailUS", widget: "string" }
+          - { label: "WhatsApp / Vietnam phone", name: "phone", widget: "string" }
+
+  - name: "projects"
+    label: "Projects & Portfolio"
+    folder: "_projects"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Project Name", name: "title", widget: "string" }
+      - { label: "Sector", name: "sector", widget: "select", options: ["Resort", "Industrial", "Education", "Custom"] }
+      - { label: "Location", name: "location", widget: "string" }
+      - { label: "Number of Beds", name: "beds", widget: "number" }
+      - { label: "Tier", name: "tier", widget: "select", options: ["Economy", "Standard", "Premium"] }
+      - { label: "Cover Image", name: "image", widget: "image" }
+      - { label: "Gallery Images", name: "gallery", widget: "list", field: { label: "Image", name: "image", widget: "image" }, required: false }
+      - { label: "Project Description", name: "description", widget: "textarea" }
+      - { label: "Published", name: "published", widget: "boolean", default: true }

@@ -1,0 +1,25 @@
+# Netlify configuration for The Fab Collective
+# https://the-fab-collective.com
+
+[build]
+  publish = "."
+
+# Contact form handling
+# Netlify automatically detects the data-netlify="true" form in index.html
+# Form submissions will appear in: Netlify Dashboard → Forms
+
+# Redirect www to apex domain
+[[redirects]]
+  from = "https://www.the-fab-collective.com/*"
+  to = "https://the-fab-collective.com/:splat"
+  status = 301
+  force = true
+
+# Security headers
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
