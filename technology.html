@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AROBOTIX: Technology</title>
+<meta name="description" content="The systems behind the coordination layer: the BIM-to-Task Compiler, CTOM, the Proof-of-Work record, the Execution Data Graph, and the hardware roadmap.">
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="icon.svg">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+<link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<meta name="theme-color" content="#0a0a0a">
+
+<!-- Open Graph (link preview) -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AROBOTIX">
+<meta property="og:title" content="AROBOTIX: The Coordination Layer for Modern Construction">
+<meta property="og:description" content="The plan says one thing, the site does another, and nobody can prove what happened. AROBOTIX is the neutral coordination and verification layer between the digital plan and the job site, creating a defensible record of what actually got built. As automation arrives on site, the same layer coordinates it too.">
+<meta property="og:url" content="https://www.arobotix.com/">
+<meta property="og:image" content="https://www.arobotix.com/arobotix-hero-poster.jpg">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="720">
+<meta property="og:image:alt" content="AROBOTIX: robots and machines on an automated construction site at night">
+
+<!-- Twitter / X card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AROBOTIX: The Coordination Layer for Modern Construction">
+<meta name="twitter:description" content="The neutral coordination and verification layer between the digital plan and the job site, with a defensible record of what actually got built.">
+<meta name="twitter:image" content="https://www.arobotix.com/arobotix-hero-poster.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<!-- NAV -->
+<nav id="nav">
+  <a class="brand" href="index.html">
+    <img src="arobotix-logo-white.png" alt="AROBOTIX logo">
+    <span class="wordmark">AROBOTIX</span>
+  </a>
+  <div class="navlinks">
+    <a href="about.html">About</a>
+    <a href="platform.html">Platform</a>
+    <a href="technology.html" class="active">Technology</a>
+    <a href="why.html">Why Us</a>
+    <a href="partners.html">Partners</a>
+    <a href="pricing.html">Pricing</a>
+  </div>
+  <div class="nav-right">
+    <a class="nav-cta" href="contact.html">Get in touch</a>
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="about.html">About</a>
+    <a href="platform.html">Platform</a>
+    <a href="technology.html" class="active">Technology</a>
+    <a href="why.html">Why Us</a>
+    <a href="partners.html">Partners</a>
+    <a href="pricing.html">Pricing</a>
+    <a href="contact.html">Get in touch</a>
+  </div>
+</nav>
+<!-- PAGE HERO -->
+<header class="page-hero">
+  <div class="wrap">
+    <div class="kicker reveal in"><span class="ln"></span><span class="eyebrow">The Technology</span></div>
+    <h1 class="reveal in d1">The systems behind the <span class="grad">coordination layer</span>.</h1>
+    <p class="lead reveal in d2">The platforms we are building, in the order they have to be built, from the BIM-to-Task Compiler and the execution data model to the Proof-of-Work record, plus the hardware on the roadmap.</p>
+  </div>
+</header>
+
+<!-- TECHNOLOGY -->
+<section class="section" id="tech" style="background:linear-gradient(180deg,var(--bg),#070a0c 50%,var(--bg))">
+  <div class="wrap">
+    <p class="lead reveal d2" style="margin-top:18px">AROBOTIX is an AI-native system with engineered guardrails. The wedge is a compiler that turns models into structured, verifiable work. Everything else is built on top of it.</p>
+
+    <div class="tech-tabs reveal d2" style="margin-top:40px" id="techTabs">
+      <button class="tech-tab active" data-tab="0">01 / BIM-to-Task Compiler</button>
+      <button class="tech-tab" data-tab="1">02 / CTOM Schema</button>
+      <button class="tech-tab" data-tab="2">03 / Proof-of-Work</button>
+      <button class="tech-tab" data-tab="3">04 / Execution Data Graph</button>
+      <button class="tech-tab" data-tab="4">05 / Orchestration &amp; AI-Assist</button>
+    </div>
+
+    <!-- panel 0 -->
+    <div class="tech-panel active" data-panel="0">
+      <div>
+        <div class="ph">Foundational wedge <span class="pill">Compiler before UI</span></div>
+        <h3>BIM-to-Executable Task Compiler</h3>
+        <p>The first critical system. It reads the digital model and compiles it into structured execution tasks, with readiness validation, sequencing, and dependency mapping built in. It turns drawings into instructions without dictating means and methods.</p>
+        <p>In the Crawl phase, classification is rule-based, which is sufficient and more defensible for the pilot than a black-box model. The output is clear, verifiable, trackable tasks.</p>
+        <ul class="tick">
+          <li>Readiness validation logic and dependency mapping</li>
+          <li>Sequencing options, not sequencing commands</li>
+          <li>Revit support via Autodesk Platform Services, open BIM via IFC</li>
+        </ul>
+      </div>
+      <div>
+        <div class="codeblock">
+<span class="c"># BIM model → structured executable tasks</span><br>
+<span class="k">task</span> = compiler.<span class="k">compile</span>(model=<span class="s">"tower_L12.ifc"</span>)<br><br>
+{<br>
+&nbsp;&nbsp;<span class="k">"task_id"</span>: <span class="s">"STR-V-0421"</span>,<br>
+&nbsp;&nbsp;<span class="k">"group"</span>: <span class="s">"STRUCTURE-VERTICAL"</span>,<br>
+&nbsp;&nbsp;<span class="k">"readiness"</span>: [<span class="s">"rebar_set"</span>, <span class="s">"formwork_ok"</span>],<br>
+&nbsp;&nbsp;<span class="k">"depends_on"</span>: [<span class="s">"FND-0188"</span>],<br>
+&nbsp;&nbsp;<span class="k">"assignable_to"</span>: [<span class="s">"human"</span>, <span class="s">"machine"</span>],<br>
+&nbsp;&nbsp;<span class="k">"verify"</span>: <span class="s">"proof_of_work"</span><br>
+}
+        </div>
+      </div>
+    </div>
+
+    <!-- panel 1 -->
+    <div class="tech-panel" data-panel="1">
+      <div>
+        <div class="ph">Architecture <span class="pill">Locked first</span></div>
+        <h3>Construction Task Object Model (CTOM)</h3>
+        <p>The schema that everything else depends on. CTOM is organized by execution pattern, not trade name, so the same logic generalizes across projects. Each group carries its own readiness prerequisites, verification requirements, and dependency structure.</p>
+        <p>Getting this schema right is the difference between a system that compounds and one that breaks on the second project.</p>
+      </div>
+      <div class="tech-spec">
+        <div class="hd">10 execution-pattern field groups</div>
+        <div class="li"><span class="key">01</span><span class="val">Site-Civil</span></div>
+        <div class="li"><span class="key">02</span><span class="val">Foundations</span></div>
+        <div class="li"><span class="key">03</span><span class="val">Structure-Vertical</span></div>
+        <div class="li"><span class="key">04</span><span class="val">Structure-Horizontal</span></div>
+        <div class="li"><span class="key">05</span><span class="val">Envelope</span></div>
+        <div class="li"><span class="key">06</span><span class="val">MEP-Rough</span></div>
+        <div class="li"><span class="key">07</span><span class="val">Interiors-Construction</span></div>
+        <div class="li"><span class="key">08</span><span class="val">Finishes</span></div>
+        <div class="li"><span class="key">09</span><span class="val">MEP-Finish</span></div>
+        <div class="li"><span class="key">10</span><span class="val">Specialty-Systems</span></div>
+      </div>
+    </div>
+
+    <!-- panel 2 -->
+    <div class="tech-panel" data-panel="2">
+      <div>
+        <div class="ph">Hero output <span class="pill">Pilot deliverable</span></div>
+        <h3>Proof-of-Work Record</h3>
+        <p>A structured, confidence-tagged record that a task was executed: the time, the machines, the conditions, and the human confirmation, all traceable. It is a defensive record and a dispute-reduction layer.</p>
+        <p>It is not automated QA signoff, legal certification, or fault assignment. Human review and final accountability stay central. When a question comes up months later, the verified record surfaces in seconds, before it becomes a claim.</p>
+        <ul class="tick">
+          <li>Confidence-tagged, time-stamped, traceable</li>
+          <li>Built around contractor authority, not against it</li>
+          <li>Turns disputes into lookups</li>
+        </ul>
+      </div>
+      <div class="tech-spec">
+        <div class="hd">Record · concrete pour confirmed</div>
+        <div class="li"><span class="key">task</span><span class="val">STR-H-0912 · slab pour L12</span></div>
+        <div class="li"><span class="key">timestamp</span><span class="val">2026-08-04 10:03 ICT</span></div>
+        <div class="li"><span class="key">assets</span><span class="val">pump-02, vibrator-04</span></div>
+        <div class="li"><span class="key">conditions</span><span class="val">31°C · slump verified</span></div>
+        <div class="li"><span class="key">confirmed_by</span><span class="val">site supervisor</span></div>
+        <div class="li"><span class="key">confidence</span><span class="val" style="color:var(--accent)">HIGH · 0.94</span></div>
+      </div>
+    </div>
+
+    <!-- panel 3 -->
+    <div class="tech-panel" data-panel="3">
+      <div>
+        <div class="ph">The moat <span class="pill">Compounding</span></div>
+        <h3>Execution Data Graph</h3>
+        <p>Every project we run produces a dataset no competitor can replicate: the first verified, confidence-tagged record of how construction actually happens at task level. It grows with every build and gets harder to replicate with every cycle.</p>
+        <p>Features can be copied. Operational intelligence compounds. The graph powers benchmarking, risk prediction, and the pattern recognition that makes the next project's coordination smarter.</p>
+      </div>
+      <div>
+        <div class="flywheel" style="flex-direction:column;align-items:flex-start">
+          <span class="fw">Better coordination</span>
+          <span class="ar">↓</span>
+          <span class="fw">Cleaner execution data</span>
+          <span class="ar">↓</span>
+          <span class="fw">Smarter coordination</span>
+          <span class="ar">↓</span>
+          <span class="fw">Stronger network effects</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- panel 4 -->
+    <div class="tech-panel" data-panel="4">
+      <div>
+        <div class="ph">Neutral infrastructure <span class="pill">Robot-agnostic</span></div>
+        <h3>Orchestration &amp; AI-Assist</h3>
+        <p>A neutral intelligence layer that delivers contextual insight across different robots and applications. It captures real-time execution data, sequences work to site conditions, and answers project questions by citing the underlying project data.</p>
+        <p>AI assists task decomposition with human validation checkpoints throughout. Every robot vendor owns its silo. No one orchestrates across all of them. That neutral position is the strategic advantage, and taking sides with any OEM would destroy it.</p>
+        <ul class="tick">
+          <li>Robot-agnostic APIs and partner integrations, no hardware lock-in</li>
+          <li>AI-assisted decomposition with human checkpoints</li>
+          <li>Answers cite project data, not guesses</li>
+        </ul>
+      </div>
+      <div class="tech-spec">
+        <div class="hd">Stack</div>
+        <div class="li"><span class="key">api</span><span class="val">FastAPI</span></div>
+        <div class="li"><span class="key">data</span><span class="val">PostgreSQL</span></div>
+        <div class="li"><span class="key">cloud</span><span class="val">AWS</span></div>
+        <div class="li"><span class="key">bim_revit</span><span class="val">Autodesk Platform Services</span></div>
+        <div class="li"><span class="key">bim_open</span><span class="val">IFC schema</span></div>
+        <div class="li"><span class="key">classify</span><span class="val">Uniclass · OmniClass</span></div>
+      </div>
+    </div>
+
+    <!-- HARDWARE ROADMAP -->
+    <div class="hw-head reveal">
+      <div class="eyebrow">Hardware on the Roadmap</div>
+      <h3 style="font-size:clamp(1.4rem,2.6vw,2rem);margin:12px 0 10px">Software first. Hardware where it compounds.</h3>
+      <p class="lead">Planned field devices that extend the platform from the screen to the slab. Each one feeds the same execution data graph, and none is required for the software to work. We lean toward integrating proven hardware rather than building from scratch. These are exploratory roadmap items, not shipping products.</p>
+    </div>
+
+    <div class="hw-explorer reveal d1" style="margin-top:30px">
+      <div class="hw-tabs">
+        <button class="hw-tab active" data-hw="0">01 / AR Readiness Headset</button>
+        <button class="hw-tab" data-hw="1">02 / Proof-of-Work Cam</button>
+        <button class="hw-tab" data-hw="2">03 / Readiness Sensors</button>
+        <button class="hw-tab" data-hw="3">04 / Task Tagging</button>
+        <button class="hw-tab" data-hw="4">05 / Edge Gateway</button>
+      </div>
+
+      <div class="hw-panel active" data-hwpanel="0">
+        <div>
+          <div class="ph">Field UI <span class="pill">Viability: High</span></div>
+          <h3>AR Readiness &amp; Model-Viewing Headset</h3>
+          <p>A heads-up display that overlays the compiler's task sequence, readiness status, and model geometry onto the physical work area. Most likely an integration play on existing AR hardware rather than a ground-up build, which keeps it doable.</p>
+          <p>It is the field-facing window into the software: the place where the plan meets the slab.</p>
+          <ul class="tick"><li>Overlays task sequence and readiness on-site</li><li>Integration-first, not a ground-up build</li><li>The crew's view into the compiler</li></ul>
+        </div>
+        <div>
+          <img src="arobotix-holo-helmet.jpg" alt="AROBOTIX Holographic Projector Helmet concept" class="hw-img" data-full="arobotix-holo-helmet.jpg">
+          <div class="hw-cap">Concept render · tap to enlarge</div>
+        </div>
+      </div>
+
+      <div class="hw-panel" data-hwpanel="1">
+        <div>
+          <div class="ph">Produces the hero output <span class="pill">Viability: High</span></div>
+          <h3>Helmet-Mounted Proof-of-Work Capture Cam</h3>
+          <p>A small camera that auto-logs geotagged, timestamped capture against the active task and writes directly to the Proof-of-Work record. It turns "work happened" into a confidence-tagged record without anyone stopping to document.</p>
+          <p>Strategically the strongest of the five, because it directly produces our hero output.</p>
+        </div>
+        <div>
+          <img src="arobotix-pow-cam.png" alt="AROBOTIX Proof-of-Work Capture Cam concept" class="hw-img" data-full="arobotix-pow-cam.png">
+          <div class="hw-cap">Concept render · tap to enlarge</div>
+        </div>
+      </div>
+
+      <div class="hw-panel" data-hwpanel="2">
+        <div>
+          <div class="ph">Verified readiness <span class="pill">Viability: Medium</span></div>
+          <h3>Readiness Sensor Beacons</h3>
+          <p>Low-cost sensors for the physical prerequisites the CTOM already tracks: concrete maturity, moisture, temperature, and cure state. They turn readiness validation from a human checkbox into a verified signal.</p>
+          <p>A tight fit with the FOUNDATIONS and STRUCTURE field groups. Harder to build, but defensible because the data is ours.</p>
+        </div>
+        <div>
+          <img src="arobotix-sensor-beacon.png" alt="AROBOTIX Readiness Sensor Beacon concept" class="hw-img" data-full="arobotix-sensor-beacon.png">
+          <div class="hw-cap">Concept render · tap to enlarge</div>
+        </div>
+      </div>
+
+      <div class="hw-panel" data-hwpanel="3">
+        <div>
+          <div class="ph">Clean data input <span class="pill">Viability: High</span></div>
+          <h3>RFID / QR / NFC Task Tagging</h3>
+          <p>Physical tags placed on assemblies or zones, paired with a scanner, so a worker checks a task in and out by scanning. Cheap, proven technology, easy to build, and it anchors the Proof-of-Work timeline to real locations and people.</p>
+          <p>Low differentiation on its own, but a clean, reliable data input into the record.</p>
+        </div>
+        <div>
+          <img src="arobotix-task-tagging.png" alt="AROBOTIX RFID / QR / NFC task tagging concept" class="hw-img" data-full="arobotix-task-tagging.png">
+          <div class="hw-cap">Concept render · tap to enlarge</div>
+        </div>
+      </div>
+
+      <div class="hw-panel" data-hwpanel="4">
+        <div>
+          <div class="ph">Future-proofing <span class="pill">Viability: Medium</span></div>
+          <h3>On-Site Edge Gateway</h3>
+          <p>A ruggedized box that aggregates jobsite sensor, camera, and machine data locally, then syncs to the cloud. As sites get more automated and bandwidth gets tight, whoever owns the edge aggregation point owns the data flow.</p>
+          <p>The least flashy of the five, and arguably the most strategic for the orchestration vision.</p>
+        </div>
+        <div>
+          <img src="arobotix-edge-gateway.png" alt="AROBOTIX On-Site Edge Gateway concept" class="hw-img" data-full="arobotix-edge-gateway.png">
+          <div class="hw-cap">Concept render · tap to enlarge</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CTA -->
+<section class="section cta">
+  <div class="wrap">
+    <div class="eyebrow reveal" style="text-align:center">The Future</div>
+    <h2 class="reveal d1" style="margin-top:18px">The next big construction platform won't build.<br><span class="grad">It will orchestrate.</span></h2>
+    <div class="hero-actions reveal d2" style="justify-content:center;margin-top:38px">
+      <a class="btn btn-primary" href="contact.html">Get in touch <span>&#8594;</span></a>
+      <a class="btn btn-ghost" href="partners.html">Become a partner</a>
+    </div>
+  </div>
+</section>
+<div class="lightbox" id="lightbox"><span class="lb-close" id="lbClose">&times;</span><img id="lbImg" src="" alt="AROBOTIX hardware concept"></div>
+<footer>
+  <div class="wrap">
+    <span style="display:flex;align-items:center;gap:12px"><img src="arobotix-logo-white.png" alt="AROBOTIX" style="height:30px;width:auto;opacity:.85">AROBOTIX CORP. · DELAWARE C-CORP · HO CHI MINH CITY</span>
+    <span class="legal"><a href="terms.html">Terms of Use</a> · <a href="privacy.html">Privacy Policy</a></span>
+    <span>© 2026 · CONFIDENTIAL</span>
+  </div>
+</footer>
+<script src="main.js"></script>
+</body>
+</html>
