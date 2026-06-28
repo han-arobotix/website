@@ -3,12 +3,12 @@
   --bg-2:#0c1013;
   --surface:#11171b;
   --surface-2:#161d22;
-  --line:rgba(255,255,255,.08);--edge:rgba(255,255,255,.26);
-  --line-2:rgba(255,255,255,.14);
+  --line:rgba(255,255,255,.16);--edge:rgba(255,255,255,.26);
+  --line-2:rgba(255,255,255,.26);
   --accent:#00d4ff;
   --accent-deep:#0596b8;
   --text:#eef3f6;
-  --muted:#8a959d;
+  --muted:#a4b0b7;
   --muted-2:#5e676e;
   --danger:#ff5a6e;
   --ok:#39d98a;
@@ -439,3 +439,24 @@ a.card:hover .more{gap:11px}
 .tlayer{fill:rgba(0,212,255,0);stroke:none;transition:fill .2s;cursor:pointer;pointer-events:all}
 .tlayer:hover{fill:rgba(0,212,255,.32)}
 .runner{fill:none;stroke:var(--accent);stroke-width:1.9;stroke-dasharray:.3 .7;filter:drop-shadow(0 0 4px rgba(0,212,255,.9));opacity:0;pointer-events:none}
+
+/* ===== LIGHT SECTIONS (inverted palette, on-brand) ===== */
+.section.light{--surface:#ffffff;--surface-2:#eaf1f6;--bg-2:#e3eaef;--text:#0e161c;--muted:#54626c;--muted-2:#8694a0;--line:rgba(14,24,32,.16);--line-2:rgba(14,24,32,.30);--accent:#0596b8;background:#e9eff3;color:#0e161c;border-top:1px solid rgba(14,24,32,.08);border-bottom:1px solid rgba(14,24,32,.08)}
+.section.light h1,.section.light h2,.section.light h3,.section.light h4{color:#0e161c}
+.section.light .grad{background:linear-gradient(100deg,#0596b8,#11abce 60%,#0596b8);-webkit-background-clip:text;background-clip:text;color:transparent}
+.section.light .gapbox{background:linear-gradient(135deg,rgba(5,150,184,.09),transparent)}
+.section.light .ic{background:rgba(5,150,184,.1);border-color:rgba(5,150,184,.28)}
+
+/* ===== LIGHT-UP HOVER (home + partners cards, pricing plans) ===== */
+.litbox{transition:transform .35s,border-color .3s,background .3s,box-shadow .3s}
+.litbox:hover{background:#eef5fa;border-color:var(--accent);box-shadow:0 14px 44px rgba(0,212,255,.22);transform:translateY(-6px)}
+.litbox:hover::before{opacity:0}
+.litbox:hover h3{color:#0b1419}
+.litbox:hover p{color:#42505a}
+.litbox:hover .more{color:var(--accent-deep)}
+.plan:hover{background:#eef5fa;border-color:var(--accent);box-shadow:0 14px 44px rgba(0,212,255,.22);transform:translateY(-6px)}
+.plan:hover .tier{color:var(--accent-deep)}
+.plan:hover h3,.plan:hover .price{color:#0b1419}
+.plan:hover .who{color:#46535c}
+.plan:hover ul li{color:#42505a}
+.plan:hover .pbtn{color:#0b1419;border-color:var(--accent)}
