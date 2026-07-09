@@ -498,3 +498,11 @@ a.card:hover .more{gap:11px}
 #tech .datagraph .dg-sub{font-family:'IBM Plex Mono',monospace;font-size:.67rem;color:#8b97a0;margin-top:5px;line-height:1.55}
 #tech .datagraph .dg-ar{color:#00d4ff;font-size:1.15rem;line-height:1;padding:9px 0}
 #tech .datagraph .dg-loop{margin-top:18px;font-family:'IBM Plex Mono',monospace;font-size:.71rem;letter-spacing:.04em;color:#00d4ff;border:1px dashed rgba(0,212,255,.45);border-radius:30px;padding:8px 18px}
+
+/* ===== Problem stat row ===== */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px;margin-top:44px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:26px;display:flex;flex-direction:column;transition:border-color .3s,transform .3s}
+.stat:hover{border-color:var(--accent);transform:translateY(-4px)}
+.stat .n{font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:clamp(2rem,4vw,2.8rem);line-height:1;color:var(--accent)}
+.stat .d{color:var(--text);margin-top:12px;line-height:1.6;flex:1}
+.stat .src{font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:.08em;color:var(--muted);margin-top:14px}
