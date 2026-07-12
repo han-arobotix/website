@@ -517,3 +517,18 @@ a.card:hover .more{gap:11px}
 .pv p{margin:0;font-size:.92rem;line-height:1.6}
 .litbox:hover .pv{border-top-color:rgba(14,24,32,.18)}
 .litbox:hover .pv .lbl{color:var(--accent-deep)}
+
+/* ===== Partner slot indicators ===== */
+.slots{margin-top:16px;border-top:1px solid var(--line);padding-top:13px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.slots .dots{display:flex;gap:6px}
+.slots .dot{width:17px;height:17px;border-radius:50%;border:1px solid var(--line-2);display:flex;align-items:center;justify-content:center;flex:none}
+.slots .dot.on{background:var(--accent);border-color:var(--accent);box-shadow:0 0 10px rgba(0,212,255,.45)}
+.slots .dot.on svg{stroke:#04141a}
+.slots .dot svg{width:10px;height:10px;stroke:transparent;stroke-width:2.6;fill:none}
+.slots .cnt{font-family:'IBM Plex Mono',monospace;font-size:.66rem;letter-spacing:.1em;color:var(--muted);white-space:nowrap}
+.slots .cnt b{color:var(--accent);font-weight:600}
+.litbox:hover .slots{border-top-color:rgba(14,24,32,.18)}
+.litbox:hover .slots .cnt{color:#54626c}
+.litbox:hover .slots .cnt b{color:var(--accent-deep)}
+.litbox:hover .slots .dot{border-color:rgba(14,24,32,.3)}
+.litbox:hover .slots .dot.on{background:var(--accent-deep);border-color:var(--accent-deep)}
