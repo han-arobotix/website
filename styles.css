@@ -506,3 +506,6 @@ a.card:hover .more{gap:11px}
 .stat .n{font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:clamp(2rem,4vw,2.8rem);line-height:1;color:var(--accent)}
 .stat .d{color:var(--text);margin-top:12px;line-height:1.6;flex:1}
 .stat .src{font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:.08em;color:var(--muted);margin-top:14px}
+
+/* ===== Card source line ===== */
+.srcline{font-family:'IBM Plex Mono',monospace;font-size:.66rem;letter-spacing:.06em;color:var(--muted-2);margin-top:14px;display:block}
