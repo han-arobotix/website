@@ -154,7 +154,7 @@ nav.scrolled{background:rgba(10,10,10,.72);backdrop-filter:blur(14px);border-bot
 .hero-tags b{font-weight:400;white-space:nowrap}
 .hero-tags b:not(:last-child)::after{content:"·";color:var(--accent);margin:0 11px}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
-.hero h1{font-size:clamp(2.6rem,8vw,6rem);max-width:16ch}
+.hero h1{font-size:clamp(1.9rem,5.2vw,3.9rem);max-width:24ch;line-height:1.08}
 .hero h1 .grad{
   background:linear-gradient(100deg,var(--accent),#7eecff 60%,var(--accent));
   -webkit-background-clip:text;background-clip:text;color:transparent;
@@ -177,6 +177,12 @@ nav.scrolled{background:rgba(10,10,10,.72);backdrop-filter:blur(14px);border-bot
 @media(max-width:860px){
   .hero{align-items:flex-start}
   .hero-inner{padding-top:104px;padding-bottom:60px}
+}
+@media(max-height:760px) and (min-width:861px){
+  .hero h1{font-size:clamp(1.9rem,3.6vw,2.9rem)}
+  .hero-sub{margin-top:22px}
+  .hero-tags{margin-top:20px}
+  .hero-actions{margin-top:28px}
 }
 
 /* ---------- cards ---------- */
@@ -423,7 +429,7 @@ ul.tick li::before{content:"▪";color:var(--accent);font-size:.7rem;margin-top:
   <div class="hero-inner">
     <h1 class="reveal in d1">The plan says one thing.<br>The site does another.<br><span class="grad">Nobody can prove what happened.</span></h1>
     <p class="hero-sub reveal in d2">
-      AROBOTIX is the <b>neutral coordination and verification layer</b> between the digital plan and the job site. It reads the model, confirms what is ready, sequences the work across crews and machines, and creates a defensible record of what actually got built. And as robots and autonomous machines arrive on site, the same layer coordinates them too.
+      AROBOTIX is the <b>neutral coordination and verification layer</b> between the digital plan and the job site. It reads the model, confirms what is ready, sequences the work across crews and machines, and creates a defensible record of what actually got built. As AI copilots, sensors, and robots arrive on site, their output becomes evidence in that record, and the record only matters more.
     </p>
     <div class="hero-tags reveal in d3">
       <span class="dot"></span>
