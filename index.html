@@ -366,7 +366,8 @@ ul.tick li::before{content:"▪";color:var(--accent);font-size:.7rem;margin-top:
 .plan h3{font-size:1.3rem;margin:8px 0 4px}
 .plan .who{color:var(--muted);font-size:.88rem;margin-bottom:16px;min-height:40px}
 .plan .price{font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:1.1rem;color:var(--text);margin-bottom:18px;padding-bottom:18px;border-bottom:1px solid var(--line)}
-.plan ul{list-style:none;display:flex;flex-direction:column;gap:10px;margin:0 0 24px;flex:1}
+.plan ul{list-style:none;display:flex;flex-direction:column;gap:10px;margin:0;flex:1}
+.plan .who{border-bottom:1px solid var(--line);padding-bottom:16px}
 .plan ul li{display:flex;gap:10px;color:var(--muted);font-size:.9rem}
 .plan ul li::before{content:"\2713";color:var(--accent);font-weight:600}
 .plan .badge{position:absolute;top:16px;right:16px;font-family:'IBM Plex Mono',monospace;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:#03161c;background:var(--accent);padding:4px 10px;border-radius:20px}
@@ -410,7 +411,7 @@ ul.tick li::before{content:"▪";color:var(--accent);font-size:.7rem;margin-top:
     <a href="#tech">Technology</a>
     <a href="#benefits">Benefits</a>
     <a href="#partners">Partners</a>
-    <a href="#pricing">Pricing</a>
+    <a href="#pricing">Commercial model</a>
   </div>
   <a class="nav-cta" href="#contact">Get in touch</a>
 </nav>
@@ -937,66 +938,72 @@ ul.tick li::before{content:"▪";color:var(--accent);font-size:.7rem;margin-top:
 <!-- PRICING -->
 <section class="section" id="pricing" style="background:linear-gradient(180deg,var(--bg),#070a0c 50%,var(--bg))">
   <div class="wrap">
-    <div class="eyebrow reveal">Plans</div>
-    <h2 class="reveal d1" style="margin-top:14px">Pricing built around how you work.</h2>
-    <p class="lead reveal d2" style="margin-top:18px">From a single-site pilot to enterprise deployment, plans scale with your projects. Pricing is tailored to scope and scale, so we set it together. Contact us for a quote.</p>
+    <div class="eyebrow reveal">Commercial model</div>
+    <h2 class="reveal d1" style="margin-top:14px">How this gets priced. Not what it costs yet.</h2>
+    <p class="lead reveal d2" style="margin-top:18px">AROBOTIX is pre-commercial. The first structured pilot begins in Q4 2026, and no rate card exists because none has been earned yet. Publishing prices before a single site has run them would be guessing in public. What we can share is the shape of the commercial model, so you know what a conversation would look like when the time comes.</p>
 
     <div class="plans">
       <div class="plan reveal">
-        <div class="tier">Start here</div>
-        <h3>Pilot</h3>
-        <div class="who">For teams proving the value on a first project.</div>
-        <div class="price">Contact us</div>
+        <div class="tier">Model 01</div>
+        <h3>Pilot engagement</h3>
+        <div class="who">A single site, fixed scope, fixed duration.</div>
         <ul>
-          <li>Single site, structured pilot</li>
-          <li>BIM-to-Task coordination</li>
-          <li>Sequence-validated execution records</li>
-          <li>Onboarding &amp; support</li>
+          <li>Scoped to one project, not an open commitment</li>
+          <li>Success criteria agreed in writing before day one</li>
+          <li>Measured on coordination hours saved and readiness failures caught</li>
+          <li>Priced as an engagement, not a subscription</li>
         </ul>
-        <a class="pbtn" href="mailto:info@arobotix.com?subject=AROBOTIX%20Pilot%20Plan">Contact us</a>
       </div>
-      <div class="plan feat reveal d1">
-        <div class="badge">Most flexible</div>
-        <div class="tier">Pay as you build</div>
-        <h3>Per-Site</h3>
-        <div class="who">For project-by-project use across your portfolio.</div>
-        <div class="price">Contact us</div>
+      <div class="plan reveal d1">
+        <div class="tier">Model 02</div>
+        <h3>Per-site</h3>
+        <div class="who">Project-by-project, once pilots convert.</div>
         <ul>
-          <li>Everything in Pilot</li>
-          <li>Per-project pricing</li>
-          <li>Full coordination &amp; sequencing</li>
-          <li>Verified execution records</li>
+          <li>A fee per active site, per month</li>
+          <li>Lowest barrier for a contractor testing a second and third project</li>
+          <li>Scales with sites, not with seats or users</li>
+          <li>No portfolio-wide commitment required</li>
         </ul>
-        <a class="pbtn" href="mailto:info@arobotix.com?subject=AROBOTIX%20Per-Site%20Plan">Contact us</a>
       </div>
       <div class="plan reveal d2">
-        <div class="tier">At scale</div>
-        <h3>Enterprise</h3>
-        <div class="who">For general contractors and owners deploying across many sites.</div>
-        <div class="price">Contact us</div>
+        <div class="tier">Model 03</div>
+        <h3>Enterprise licensing</h3>
+        <div class="who">Portfolio deployment for contractors and owners.</div>
         <ul>
-          <li>Multi-site deployment</li>
-          <li>Annual or multi-year licensing</li>
-          <li>Priority support &amp; SLAs</li>
-          <li>Portfolio analytics &amp; integrations</li>
+          <li>Annual or multi-year platform licensing</li>
+          <li>Support and service levels defined per agreement</li>
+          <li>Portfolio analytics and integration into existing systems</li>
+          <li>Reached through per-site use, not sold ahead of it</li>
         </ul>
-        <a class="pbtn" href="mailto:info@arobotix.com?subject=AROBOTIX%20Enterprise%20Plan">Contact us</a>
       </div>
       <div class="plan reveal d3">
-        <div class="tier">Integrate</div>
-        <h3>Partner / OEM</h3>
-        <div class="who">For robot, equipment, and software vendors.</div>
-        <div class="price">Contact us</div>
+        <div class="tier">Model 04</div>
+        <h3>Partner and OEM</h3>
+        <div class="who">For robot, equipment, sensor, and software vendors.</div>
         <ul>
-          <li>Robot-agnostic API access</li>
-          <li>Integration support</li>
-          <li>Revenue-share models</li>
-          <li>Joint go-to-market</li>
+          <li>API access for integration, vendor-agnostic by design</li>
+          <li>Usage-based pricing for high-volume verification</li>
+          <li>Revenue-share arrangements where volume justifies it</li>
+          <li>Structured case by case, no standard template yet</li>
         </ul>
-        <a class="pbtn" href="mailto:info@arobotix.com?subject=AROBOTIX%20Partner%20Plan">Contact us</a>
       </div>
     </div>
-    <p class="note reveal">We do not publish fixed prices, because every project differs in scope, scale, and integration needs. Contact us and we will put together a plan that fits.</p>
+
+    <div class="grid g2" style="margin-top:24px">
+      <div class="card reveal">
+        <h3>Why there is no price on this page</h3>
+        <p>A number published today would be an estimate dressed up as a rate. Scope, site count, model quality, and integration depth move the figure more than any list price could account for. The honest version is that pricing gets set once real sites produce real numbers, and the pilot is what produces them.</p>
+      </div>
+      <div class="card reveal d1">
+        <h3>What you can do now</h3>
+        <p>If task readiness and execution records are a live problem on your projects, the useful next step is a scoping conversation, not a quote. We are selecting a small number of pilot partners, and the criteria are project fit and willingness to measure results, not budget.</p>
+      </div>
+    </div>
+
+    <div class="hero-actions reveal" style="margin-top:32px">
+      <a class="btn btn-primary" href="mailto:info@arobotix.com?subject=AROBOTIX%20Pilot%20Scoping%20Conversation">Start a scoping conversation <span>&#8594;</span></a>
+    </div>
+    <p class="note reveal">Status as of September 2026. This section will be replaced with published pricing once pilot results support it.</p>
   </div>
 </section>
 
@@ -1006,7 +1013,7 @@ ul.tick li::before{content:"▪";color:var(--accent);font-size:.7rem;margin-top:
 <section class="section cta" id="contact">
   <div class="wrap">
     <div class="eyebrow reveal" style="text-align:center">The Future</div>
-    <h2 class="reveal d1" style="margin-top:18px">The next big construction platform won't build.<br><span class="grad">It will prove what was built.</span></h2>
+    <h2 class="reveal d1" style="margin-top:18px">The next big construction platform won't build.<br><span class="grad">It will sequence, verify, and prove what was built.</span></h2>
     <div class="hero-actions reveal d2" style="justify-content:center;margin-top:38px">
       <a class="btn btn-primary" href="mailto:info@arobotix.com?subject=AROBOTIX%20Enquiry">Contact us <span>→</span></a>
       <a class="btn btn-ghost" href="#partners">Become a partner</a>
